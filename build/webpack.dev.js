@@ -12,6 +12,8 @@ const config = merge(baseConfig, {
     filename: 'js/[name].js',
   },
 
+  devtool: 'cheap-module-source-map',
+
   module: {
     rules: [
       {
