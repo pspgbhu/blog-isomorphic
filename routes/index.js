@@ -1,21 +1,27 @@
 const router = require('koa-router')();
 const { createStore } = require('redux');
+const routerArticle = require('./article');
 const renderStaticHtml = require('../utils/render').default;
-const { getOverviews } = require('../controllers');
+const getOverviews = require('../controllers/getOverviews');
+
+router.use(routerArticle.routes());
 
 /**
- * 返回统一的默认页面
+ * 统一处理默认页面
  */
 router.get('*', filterPageRoute, async (ctx) => {
-  const context = {};
-  const store = createStore(state => state, {
+  console.log('--- Dealing with * route'); // eslint-disable-line
+
+  const store = ctx.reactStore || createStore(state => state, {
     overviewList: await getOverviews(),
   });
-  const content = renderStaticHtml({ ctx, store, context });
+  const context = ctx.reactContext || {};
+  const content = ctx.reactContent || renderStaticHtml({ ctx, store, context });
+
   const preloadedState = store.getState();
 
   await ctx.render('index', {
-    title: 'React Isomorphic',
+    title: ctx.reactTitle || 'Pspgbhu 的博客',
     NODE_ENV: process.env.NODE_ENV,
     html: content,
     state: JSON.stringify(preloadedState),
@@ -33,5 +39,6 @@ async function filterPageRoute(ctx, next) {
   }
   await next();
 }
+
 
 module.exports = router;

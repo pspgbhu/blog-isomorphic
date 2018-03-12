@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import NotFound from './pages/404';
+import Article from './pages/Article';
 
 require('./style/_style.less');
 
@@ -15,7 +16,7 @@ const navList = [
   },
 ];
 
-const App = () => ((
+const App = () => (
   <div>
     <Header />
     <Nav navList={navList}></Nav>
@@ -23,12 +24,13 @@ const App = () => ((
       <div className="container">
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/article/:title" component={Article} />
           <Route component={NotFound} />
         </Switch>
       </div>
     </section>
     <Footer />
   </div>
-));
+);
 
 export default App;
