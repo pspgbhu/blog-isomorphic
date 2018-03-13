@@ -1,7 +1,7 @@
 [
   {
     "title": "这是第一个文章",
-    "category": "A类",
+    "cate": ["A类", "B类"],
     "tags": [
       "标签1",
       "标签2"
@@ -9,6 +9,6 @@
     "date": "2018年1月9日",
     "brief": "文章缩略文章缩略文章缩略",
     "img": "http://static.pspgbhu.me/common/pic_vangogh.jpg",
-    "link": "test"
+    "slug": "egret-practice"
   }
 ]

@@ -2,7 +2,7 @@ const router = require('koa-router')();
 
 router.prefix('/article');
 
-router.get('/:title', async (ctx, next) => {
+router.get('/:slug', async (ctx, next) => {
   console.log('--- Dealing with /article/:title route');  // eslint-disable-line
 
   const regRst = /\/\w+\/(\w)/.exec(ctx.url);

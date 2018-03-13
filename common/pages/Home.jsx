@@ -3,9 +3,15 @@ import Ovlist from '../containers/Ovlist';
 import Aside from '../components/Aside';
 
 const Home = () => (
-  <div className="row">
+  <div>
     <Ovlist />
-    <Aside />
+    <Aside
+      search
+      social
+      cate
+      arch
+      tags
+    />
   </div>
 );
 

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 const Viewblock = ({
-  title, category, tags, date, brief, img, link,
+  title, cate, tags, date, brief, img, slug,
 }) => (
   <article className="post">
     <div className="post-media">
@@ -32,7 +32,9 @@ const Viewblock = ({
           <span className="categories-meta fa-wrap">
             <i className="fa fa-folder-open-o"></i>
             <span> </span>
-            <span>{category}</span>
+            { cate && cate.map(item => (
+              <span key={item}>{item} </span>
+            ))}
           </span>
           <span className="fa-wrap">
             <i className="fa fa-tags"></i>
@@ -50,7 +52,7 @@ const Viewblock = ({
       </div>
 
       <div className="post-permalink">
-        <Link to={`/article/${link}`} className="btn btn-default">阅读全文</Link>
+        <Link to={`/article/${slug}`} className="btn btn-default">阅读全文</Link>
       </div>
     </footer>
   </article>
@@ -58,12 +60,12 @@ const Viewblock = ({
 
 Viewblock.propTypes = {
   title: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
+  cate: PropTypes.array.isRequired,
   tags: PropTypes.array,
   date: PropTypes.string.isRequired,
   brief: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
-  link: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
 };
 
 export default Viewblock;

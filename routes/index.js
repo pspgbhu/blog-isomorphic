@@ -2,7 +2,7 @@ const router = require('koa-router')();
 const { createStore } = require('redux');
 const routerArticle = require('./article');
 const renderStaticHtml = require('../utils/render').default;
-const getOverviews = require('../controllers/getOverviews');
+const { getOverviews, getSlugList } = require('../controllers');
 
 router.use(routerArticle.routes());
 
@@ -12,9 +12,14 @@ router.use(routerArticle.routes());
 router.get('*', filterPageRoute, async (ctx) => {
   console.log('--- Dealing with * route'); // eslint-disable-line
 
-  const store = ctx.reactStore || createStore(state => state, {
+  const serverState = {
+    slugList: await getSlugList(),
     overviewList: await getOverviews(),
-  });
+  };
+
+  console.log('[serverState]:', serverState);
+
+  const store = ctx.reactStore || createStore(state => state, serverState);
   const context = ctx.reactContext || {};
   const content = ctx.reactContent || renderStaticHtml({ ctx, store, context });
 

@@ -6,25 +6,16 @@ import WidgetCate from './widgets/Categories';
 import WidgetArch from './widgets/Arch';
 import WidgetTags from './widgets/Tags';
 
-function mapStateToProps(state) {
-  return {
+const Aside = ({
+  search, social, cate, arch, tags,
+}) => (
+  <aside className="col-md-4 sidebar">
+    { search && (<WidgetSearch/>)}
+    { social && (<WidgetSocial/>)}
+    { cate && (<WidgetCate/>)}
+    { arch && (<WidgetArch/>)}
+    { tags && (<WidgetTags/>)}
+  </aside>
+);
 
-  };
-}
-
-class Aside extends Component {
-  render() {
-    return (
-      <aside className="col-md-4 sidebar">
-        <WidgetSearch/>
-        <WidgetSocial/>
-        <WidgetCate/>
-        <WidgetArch/>
-        <WidgetTags/>
-      </aside>
-    );
-  }
-}
-
-
-export default connect(mapStateToProps)(Aside);
+export default Aside;
