@@ -1,6 +1,6 @@
 import React from 'react';
 import Aside from '../components/Aside';
-import Post from '../components/Post';
+import Post from '../containers/Post';
 
 const Article = () => (
   <div>

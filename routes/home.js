@@ -5,7 +5,7 @@ router.get('/', async (ctx, next) => {
   console.log('--- Dealing with HOME route');  // eslint-disable-line
 
   ctx.reactState = Object.assign({
-    overviewList: await getOverviews(),
+    overviewList: getOverviews(),
   }, ctx.reactState);
 
   await next();

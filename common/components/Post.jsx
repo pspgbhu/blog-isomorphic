@@ -15,7 +15,7 @@ const Post = ({
             <i className="fa fa-folder-open-o"></i>
             <span> </span>
             { categories && categories.map(item => (
-              <span>{item} </span>
+              <span key={item}>{item} </span>
             ))}
           </span>
 
@@ -23,7 +23,7 @@ const Post = ({
             <i className="fa fa-tags"></i>
             <span className="tags-meta">
             { tags && tags.map(item => (
-              <span>{item} </span>
+              <span key={item}>{item} </span>
             ))}
             </span>
           </span>

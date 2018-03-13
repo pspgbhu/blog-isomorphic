@@ -32,29 +32,6 @@ exports.readFileAndParse = async (slug) => {
 
 
 /**
- * 缓存一篇文章到内存
- */
-exports.cachePost = ({ slug, info }) => {
-  global.postsCache.set(slug, info);
-};
-
-
-/**
- * 缓存全部的文章
- */
-exports.cacheAllPosts = async () => {
-  const slugs = await exports.slugList();
-
-  await Promise.all(slugs.map(async (slug) => {
-    const info = await exports.readFileAndParse(slug);
-    if (info) {
-      exports.cachePost({ slug, info });
-    }
-  }));
-};
-
-
-/**
  * @returns 返回 /posts/*.md 的文件列表数组
  */
 exports.slugList = async () => {

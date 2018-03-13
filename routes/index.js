@@ -15,11 +15,10 @@ router.get('*', filterPageRoute, async (ctx) => {
   console.log('--- Dealing with * route'); // eslint-disable-line
 
   const serverState = Object.assign({
-    overviewList: await getOverviews(),
+    overviewList: getOverviews(),
     slugList: await getSlugList(),
   }, ctx.reactState);
 
-  console.log('[serverState]:', serverState);
   const store = createStore(state => state, serverState);
   const context = Object.assign({}, ctx.reactContext);
   const content = renderStaticHtml({ ctx, store, context });

@@ -431,9 +431,11 @@ pre {
         .home-post-head {
             text-align: left;
         }
+        /* autoprefixer: off */
         p.brief {
             color: @black6_color;
             height: 96px;
+            overflow: hidden;
         }
     }
     .post-body {
@@ -1123,7 +1125,7 @@ pre {
         }
         .post-content {
             p.brief {
-                .text-ellipsis();
+                // .text-ellipsis-line(4);
             }
         }
         .post-media{

@@ -10,6 +10,8 @@ router.get('/:slug', async (ctx, next) => {
   const info = await getOnePost(slug);
 
   if (info) {
+    delete info.content;
+    delete info.brief;
     ctx.reactState = Object.assign({}, {
       posts: { [slug]: info },
     }, ctx.reactState);
