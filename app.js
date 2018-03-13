@@ -1,5 +1,3 @@
-
-
 const path = require('path');
 const Koa = require('koa');
 const views = require('koa-views');
@@ -8,10 +6,18 @@ const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const serve = require('koa-static');
-
 const index = require('./routes');
+const { cacheAllPosts } = require('./utils');
 
 const app = new Koa();
+global.postsCache = new Map();
+
+// 异步缓存全部的文章到内存中
+cacheAllPosts();
+
+setTimeout(() => {
+  console.log('[global.postsCache]:', global.postsCache.keys());
+}, 1000);
 
 // error handler
 onerror(app);

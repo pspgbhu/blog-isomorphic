@@ -8,7 +8,7 @@ const Home = () => (
     <Aside
       search
       social
-      cate
+      categories
       arch
       tags
     />

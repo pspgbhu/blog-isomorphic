@@ -1,10 +1,12 @@
 const router = require('koa-router')();
 const { createStore } = require('redux');
-const routerArticle = require('./article');
+const routeArticle = require('./article');
+const routeHome = require('./home');
 const renderStaticHtml = require('../utils/render').default;
-const { getOverviews, getSlugList } = require('../controllers');
+const { getSlugList, getOverviews } = require('../controllers');
 
-router.use(routerArticle.routes());
+router.use(routeArticle.routes());
+router.use(routeHome.routes());
 
 /**
  * 统一处理默认页面
@@ -12,17 +14,15 @@ router.use(routerArticle.routes());
 router.get('*', filterPageRoute, async (ctx) => {
   console.log('--- Dealing with * route'); // eslint-disable-line
 
-  const serverState = {
-    slugList: await getSlugList(),
+  const serverState = Object.assign({
     overviewList: await getOverviews(),
-  };
+    slugList: await getSlugList(),
+  }, ctx.reactState);
 
   console.log('[serverState]:', serverState);
-
-  const store = ctx.reactStore || createStore(state => state, serverState);
-  const context = ctx.reactContext || {};
-  const content = ctx.reactContent || renderStaticHtml({ ctx, store, context });
-
+  const store = createStore(state => state, serverState);
+  const context = Object.assign({}, ctx.reactContext);
+  const content = renderStaticHtml({ ctx, store, context });
   const preloadedState = store.getState();
 
   await ctx.render('index', {

@@ -11,12 +11,12 @@ function mapStateToProps(state) {
 const Ovlist = ({ overviewList }) => (
   <main className="col-md-8 main-content">
     {overviewList.map(({
-      title, cate, tags, date, brief, img, slug,
+      title, categories, tags, date, brief, img, slug,
     }) => (
       <Viewblock
         key={slug}
         title={title}
-        cate={cate}
+        categories={categories}
         tags={tags}
         date={date}
         brief={brief}

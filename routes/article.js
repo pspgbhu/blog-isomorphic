@@ -1,23 +1,20 @@
 const router = require('koa-router')();
+const { getOnePost } = require('../controllers');
 
 router.prefix('/article');
 
 router.get('/:slug', async (ctx, next) => {
   console.log('--- Dealing with /article/:title route');  // eslint-disable-line
 
-  const regRst = /\/\w+\/(\w)/.exec(ctx.url);
-  let content = '';
+  const { slug } = ctx.params;
+  const info = await getOnePost(slug);
 
-  if (!regRst) {
-    content = '';
+  if (info) {
+    ctx.reactState = Object.assign({}, {
+      posts: { [slug]: info },
+    }, ctx.reactState);
   }
 
-  // await ctx.render('index', {
-  //   title: 'React Isomorphic',
-  //   NODE_ENV: process.env.NODE_ENV,
-  //   html: 'asdf',
-  //   state: JSON.stringify({ a: 1 }),
-  // });
   await next();
 });
 

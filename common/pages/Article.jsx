@@ -8,7 +8,7 @@ const Article = () => (
     <Aside
       search
       social
-      cate
+      categories
       arch
       tags
     />

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 const Viewblock = ({
-  title, cate, tags, date, brief, img, slug,
+  title, categories, tags, date, brief, img, slug,
 }) => (
   <article className="post">
     <div className="post-media">
@@ -32,7 +32,7 @@ const Viewblock = ({
           <span className="categories-meta fa-wrap">
             <i className="fa fa-folder-open-o"></i>
             <span> </span>
-            { cate && cate.map(item => (
+            { categories && categories.map(item => (
               <span key={item}>{item} </span>
             ))}
           </span>
@@ -60,7 +60,7 @@ const Viewblock = ({
 
 Viewblock.propTypes = {
   title: PropTypes.string.isRequired,
-  cate: PropTypes.array.isRequired,
+  categories: PropTypes.array.isRequired,
   tags: PropTypes.array,
   date: PropTypes.string.isRequired,
   brief: PropTypes.string.isRequired,

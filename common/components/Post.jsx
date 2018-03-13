@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Post = ({
-  title, cate, tags, date, html,
+  title, categories, tags, date, html,
 }) => (
   <main className="col-md-8 main-content m-post">
     <article className="post">
@@ -14,7 +14,7 @@ const Post = ({
           <span className="categories-meta fa-wrap">
             <i className="fa fa-folder-open-o"></i>
             <span> </span>
-            { cate && cate.map(item => (
+            { categories && categories.map(item => (
               <span>{item} </span>
             ))}
           </span>

@@ -7,12 +7,12 @@ import WidgetArch from './widgets/Arch';
 import WidgetTags from './widgets/Tags';
 
 const Aside = ({
-  search, social, cate, arch, tags,
+  search, social, categories, arch, tags,
 }) => (
   <aside className="col-md-4 sidebar">
     { search && (<WidgetSearch/>)}
     { social && (<WidgetSocial/>)}
-    { cate && (<WidgetCate/>)}
+    { categories && (<WidgetCate/>)}
     { arch && (<WidgetArch/>)}
     { tags && (<WidgetTags/>)}
   </aside>
