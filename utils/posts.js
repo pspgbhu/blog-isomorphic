@@ -24,6 +24,7 @@ exports.readFileAndParse = async (slug) => {
     content: parse.content,
     html: parse.html,
     brief: parse.brief,
+    slug,
   }, parse.info);
 
   return info;
