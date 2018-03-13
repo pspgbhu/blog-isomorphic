@@ -1,20 +1,4 @@
-require('babel-register')({
-  presets: [
-    'react',
-  ],
-  plugins: [
-    ['transform-runtime', {
-      polyfill: false,
-      regenerator: true,
-    }],
-    [
-      'babel-plugin-transform-require-ignore', {
-        extensions: ['.less', '.sass', '.css'],
-      },
-    ],
-  ],
-  extensions: ['.jsx'],
-});
+
 
 const path = require('path');
 const Koa = require('koa');
