@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
+import dateFormat from 'dateformat';
 
 const Viewblock = ({
   title, categories, tags, date, brief, img, slug,
@@ -17,9 +17,9 @@ const Viewblock = ({
     <div className="post-content post-overview">
       <div className="post-head home-post-head">
         <h1 className="post-title">
-          <a href="/article/react-isomorphic/">{title}</a>
+          <Link to={`/article/${slug}`}>{title}</Link>
         </h1>
-        <div className="post-meta">• <time className="post-date" dateTime={date} title="">{date}</time>
+        <div className="post-meta">• <time className="post-date" title="">{dateFormat(date, 'yyyy年mm月dd日')}</time>
         </div>
       </div>
       <p className="brief">
@@ -46,7 +46,7 @@ const Viewblock = ({
           <span className="fa-wrap">
             <i className="fa fa-clock-o"></i>
             <span> </span>
-            <span className="date-meta">{date}</span>
+            <span className="date-meta">{dateFormat(date, 'yyyy/mm/dd')}</span>
           </span>
         </div>
       </div>
