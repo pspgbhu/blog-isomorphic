@@ -4,9 +4,9 @@
  * 请只在 /common/App.jsx 中编辑路由逻辑。
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { hydrate } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, withRouter } from 'react-router-dom';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
@@ -23,10 +23,24 @@ const store = createStore(reducer, preloadedState, applyMiddleware(
   logger,
 ));
 
+class ScrollToTop extends Component {
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      window.scrollTo(0, 0);
+    }
+  }
+  render() {
+    return this.props.children;
+  }
+}
+const ScrollToTopRouter = withRouter(ScrollToTop);
+
 hydrate(
   <Provider store={store}>
     <BrowserRouter>
-      <App></App>
+      <ScrollToTopRouter>
+        <App></App>
+      </ScrollToTopRouter>
     </BrowserRouter>
   </Provider>,
 
