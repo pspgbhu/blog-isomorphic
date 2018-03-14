@@ -24,12 +24,21 @@ exports.cacheAllPosts = async () => {
  * 缓存首页预览信息
  */
 exports.cacheOverviews = () => {
+  const arr = [];
   global.postsCache.forEach((value) => {
     const obj = Object.assign({}, value);
     delete obj.content;
     delete obj.html;
-    global.overviewsCache.add(obj);
+    arr.push(obj);
   });
+
+  arr.sort((a, b) => {
+    const adate = new Date(a.date).getTime();
+    const bdate = new Date(b.date).getTime();
+    return bdate - adate;
+  });
+
+  global.overviewsCache = new Set(arr);
 };
 
 

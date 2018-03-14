@@ -2,9 +2,11 @@ const path = require('path');
 const fs = require('fs');
 const util = require('util');
 const Parser = require('../lib/parser');
+const dateFormat = require('dateformat');
 
 const readFile = util.promisify(fs.readFile);
 const readdir = util.promisify(fs.readdir);
+const stat = util.promisify(fs.stat);
 
 /**
  * 读取文件并解析 markdown
@@ -12,15 +14,19 @@ const readdir = util.promisify(fs.readdir);
  */
 exports.readFileAndParse = async (slug) => {
   let raw;
+  let stats;
 
   try {
-    raw = await readFile(path.join('posts', `${slug}.md`), { encoding: 'UTF-8' });
+    const filename = `${slug}.md`;
+    raw = await readFile(path.join('posts', filename), { encoding: 'UTF-8' });
+    stats = await stat(path.join('posts', filename));
   } catch (error) {
     return null;
   }
 
   const parse = new Parser(raw);
   const info = Object.assign({
+    date: parse.date || dateFormat(stats.birthtime, 'yyyy-mm-dd HH:MM:SS'),
     content: parse.content,
     html: parse.html,
     brief: parse.brief,
@@ -36,6 +42,7 @@ exports.readFileAndParse = async (slug) => {
  */
 exports.slugList = async () => {
   const mds = await readdir('posts');
+
   const slugs = mds.map((md) => {
     const rst = /(.*)\.md$/.exec(md);
     if (!rst) { return null; }

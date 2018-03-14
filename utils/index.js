@@ -15,6 +15,7 @@ module.exports = {
   readFileAndParse,
   cachePost,
   slugList,
+
   cacheAllPosts,
   cacheOverviews,
   cacheSomeData,
