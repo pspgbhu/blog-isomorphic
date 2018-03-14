@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PostCom from '../components/Post';
 import { fetchArticle } from '../actions/fetchArticle';
+import PostPlaceHolder from '../components/PostPlaceHolder';
 
 function mapStateToProps(state, props) {
   if (state.posts && state.posts[props.match.params.slug]) {
@@ -35,15 +36,24 @@ class Post extends Component {
     const {
       title, categories, tags, date, html,
     } = this.props;
-    return (
-      <PostCom
-        title={title}
-        categories={categories}
-        tags={tags}
-        date={date}
-        html={html}
-      />
-    );
+    let postView = null;
+
+    if (title) {
+      postView = (
+        <PostCom
+          title={title}
+          categories={categories}
+          tags={tags}
+          date={date}
+          html={html}
+        />
+      );
+    } else {
+      postView = <PostPlaceHolder />;
+    }
+
+    return postView;
+    // return <PostPlaceHolder />;
   }
 }
 

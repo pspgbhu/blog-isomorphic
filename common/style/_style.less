@@ -734,6 +734,57 @@ pre {
 }
 
 /*====================================================
+    post placeholder
+====================================================*/
+.m-placeholder {
+    .placeholder() {
+        background: #eee;
+    }
+
+    h1 {
+        height: 30px;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .holdblock {
+        .placeholder();
+    }
+
+    .post-meta {
+        height: 24px;
+    }
+
+    .holdtext {
+        span:last-child {
+            margin-right: 100px;
+        }
+
+        span:first-child {
+            margin-right: 0;
+        }
+
+        span {
+            .placeholder();
+            display: block;
+            height: 19px;
+            margin: 4px 0;
+        }
+
+        margin-bottom: 25px;
+    }
+
+    .post-meta .holdmate {
+        display: inline-block;
+        .placeholder();
+        height: 16px;
+        width: 55%;
+        margin: 4px auto;
+    }
+}
+
+/*====================================================
     pagination
 ====================================================*/
 .pagination {

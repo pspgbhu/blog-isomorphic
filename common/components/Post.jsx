@@ -22,6 +22,7 @@ const Post = ({
           <span className="fa-wrap">
             <i className="fa fa-tags"></i>
             <span className="tags-meta">
+            <span> </span>
             { tags && tags.map(item => (
               <span key={item}>{item} </span>
             ))}
