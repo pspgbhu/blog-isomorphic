@@ -2,7 +2,7 @@ const { readFileAndParse, cachePost } = require('../utils');
 
 /**
  * 获取单篇文章的信息
- * @param {String} title 文件名，不用包含后缀
+ * @param {String} slug 文件名，不用包含后缀
  */
 module.exports = async (slug) => {
   // 先看本地缓存中是否有对应的文章

@@ -1,5 +1,5 @@
 const router = require('koa-router')();
-const { getOnePost } = require('../controllers');
+const { getOnePost } = require('../../controllers');
 
 router.prefix('/article');
 

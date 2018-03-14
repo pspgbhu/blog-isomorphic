@@ -3,6 +3,7 @@ const merge = require('webpack-merge');
 const baseConfig = require('./webpack.base');
 const autoprefixer = require('autoprefixer');
 const chalk = require('chalk');
+const webpack = require('webpack');
 
 const config = merge(baseConfig, {
   mode: 'development',
@@ -55,6 +56,10 @@ const config = merge(baseConfig, {
       },
     ],
   },
+
+  plugins: [
+
+  ],
 });
 
 module.exports = config;

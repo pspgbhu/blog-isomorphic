@@ -1,5 +1,5 @@
 const router = require('koa-router')();
-const { getOverviews } = require('../controllers');
+const { getOverviews } = require('../../controllers');
 
 router.get('/', async (ctx, next) => {
   console.log('--- Dealing with HOME route');  // eslint-disable-line

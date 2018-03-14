@@ -1,7 +1,12 @@
 import { combineReducers } from 'redux';
-
-const initialState = (state = {}) => state;
+import article from './article';
 
 export default combineReducers({
-  initialState,
+  posts: article,
+  overviewList(state = []) {
+    return state;
+  },
+  slugList(state = []) {
+    return state;
+  },
 });
