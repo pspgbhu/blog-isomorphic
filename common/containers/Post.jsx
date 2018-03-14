@@ -53,7 +53,6 @@ class Post extends Component {
     }
 
     return postView;
-    // return <PostPlaceHolder />;
   }
 }
 

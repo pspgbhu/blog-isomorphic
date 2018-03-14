@@ -10,14 +10,17 @@ const index = require('./routes');
 const { cacheSomeData } = require('./utils');
 
 const app = new Koa();
-global.postsCache = new Map();
-global.overviewsCache = new Set();
+
+global.cache = {
+  postsCache: new Map(),
+  overviewsCache: new Set(),
+};
 
 // 异步缓存各种数据
 cacheSomeData();
 
 setTimeout(() => {
-  console.log('[global.postsCache]:', global.postsCache.keys());
+  console.log('[global.cache.postsCache]:', global.cache.postsCache.keys());
 }, 1000);
 
 // error handler

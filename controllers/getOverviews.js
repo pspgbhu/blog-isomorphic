@@ -1,2 +1,2 @@
 
-module.exports = () => Array.from(global.overviewsCache);
+module.exports = () => Array.from(global.cache.overviewsCache);

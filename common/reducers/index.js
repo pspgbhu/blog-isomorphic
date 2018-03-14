@@ -9,4 +9,7 @@ export default combineReducers({
   slugList(state = []) {
     return state;
   },
+  categories(state = []) {
+    return state;
+  },
 });

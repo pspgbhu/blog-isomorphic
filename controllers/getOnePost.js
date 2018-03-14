@@ -5,10 +5,12 @@ const { readFileAndParse, cachePost } = require('../utils');
  * @param {String} slug 文件名，不用包含后缀
  */
 module.exports = async (slug) => {
+  const { postsCache } = global.cache;
+
   // 先看本地缓存中是否有对应的文章
-  if (global.postsCache.has(slug)) {
+  if (postsCache.has(slug)) {
     console.log('[Controller --> getOnePost]: ', '从缓存中获取数据');
-    return global.postsCache.get(slug);
+    return postsCache.get(slug);
   }
 
   const info = await readFileAndParse(slug);

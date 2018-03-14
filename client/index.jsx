@@ -11,9 +11,11 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
+
 import reducer from '../common/reducers';
 
 import App from '../common/App';
+import ScrollToTop from './ScrollToTop';
 
 // 通过服务端注入的全局变量得到初始的 state
 const preloadedState = window.__INITIAL_STATE_;
@@ -23,24 +25,12 @@ const store = createStore(reducer, preloadedState, applyMiddleware(
   logger,
 ));
 
-class ScrollToTop extends Component {
-  componentDidUpdate(prevProps) {
-    if (this.props.location !== prevProps.location) {
-      window.scrollTo(0, 0);
-    }
-  }
-  render() {
-    return this.props.children;
-  }
-}
-const ScrollToTopRouter = withRouter(ScrollToTop);
-
 hydrate(
   <Provider store={store}>
     <BrowserRouter>
-      <ScrollToTopRouter>
+      <ScrollToTop>
         <App></App>
-      </ScrollToTopRouter>
+      </ScrollToTop>
     </BrowserRouter>
   </Provider>,
 

@@ -4,26 +4,24 @@ const thunk = require('redux-thunk').default;
 const routeArticle = require('./article');
 const routeHome = require('./home');
 const renderStaticHtml = require('../../utils/render').default;
-const { getSlugList, getOverviews } = require('../../controllers');
 const reducers = require('../../common/reducers').default;
-
-console.log(reducers);
+const {
+  getSlugList,
+  getOverviews,
+  getAllCategories,
+} = require('../../controllers');
 
 router.use(routeArticle.routes());
 router.use(routeHome.routes());
 
+
 /**
  * 统一处理默认页面
  */
-router.get('*', filterPageRoute, async (ctx) => {
+router.get('*', filterPageRoute, serverState, async (ctx) => {
   console.log('--- Dealing with * route'); // eslint-disable-line
 
-  const serverState = Object.assign({
-    overviewList: getOverviews(),
-    slugList: await getSlugList(),
-  }, ctx.reactState);
-
-  const store = createStore(reducers, serverState, applyMiddleware(thunk));
+  const store = createStore(reducers, ctx.reactState, applyMiddleware(thunk));
   const context = Object.assign({}, ctx.reactContext);
   const content = renderStaticHtml({ ctx, store, context });
   const preloadedState = store.getState();
@@ -35,6 +33,20 @@ router.get('*', filterPageRoute, async (ctx) => {
     state: JSON.stringify(preloadedState),
   });
 });
+
+
+/**
+ * 生成服务端的 redux state
+ */
+async function serverState(ctx, next) {
+  ctx.reactState = Object.assign({
+    overviewList: getOverviews(),
+    slugList: await getSlugList(),
+    categories: getAllCategories(),
+  }, ctx.reactState);
+
+  await next();
+}
 
 
 /**
