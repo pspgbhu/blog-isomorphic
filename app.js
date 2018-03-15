@@ -13,15 +13,15 @@ const app = new Koa();
 
 global.cache = {
   postsCache: new Map(),
-  overviewsCache: new Set(),
+  slugsOrder: [],
 };
 
 // 异步缓存各种数据
 cacheSomeData();
 
-setTimeout(() => {
-  console.log('[global.cache.postsCache]:', global.cache.postsCache.keys());
-}, 1000);
+// setTimeout(() => {
+//   console.log('[global.cache.postsCache]:', global.cache.postsCache.keys());
+// }, 1000);
 
 // error handler
 onerror(app);

@@ -1,11 +1,12 @@
 const router = require('koa-router')();
-const article = require('./article');
+const post = require('./post');
 
 router.prefix('/api');
 
-router.use(article.routes());
+router.use(post.routes());
 
 router.get('*', async (ctx) => {
+  console.log('--- Dealing with /api route');
   const { code, msg, data } = ctx;
   ctx.body = {
     code: code !== undefined ? code : -1,

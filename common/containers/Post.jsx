@@ -38,7 +38,7 @@ class Post extends Component {
     } = this.props;
     let postView = null;
 
-    if (title) {
+    if (html) {
       postView = (
         <PostCom
           title={title}

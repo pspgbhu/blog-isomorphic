@@ -1,38 +1,36 @@
 import axios from 'axios';
 import { API_PREFIX } from '../config';
 
-export const FETCH_ARTICLE_REQUEST = 'fetch_article_requeset';
-export const FETCH_ARTICLE_ERROR = 'fetch_article_error';
-export const FETCH_ARTICLE_SUCCESS = 'fetch_article_success';
-export const FETCH_ARTICLE_CACHED = 'fetch_article_cached';
+export const FETCH_POST_REQUEST = 'fetch_article_requset';
+export const FETCH_POST_ERROR = 'fetch_post_error';
+export const FETCH_POST_SUCCESS = 'fetch_post_success';
+export const FETCH_POST_CACHED = 'fetch_post_cached';
 
 export const fetchArticle = slug => (dispatch, getState) => {
   const { posts } = getState();
-  if (posts && posts[slug]) {
-    dispatch({ type: FETCH_ARTICLE_CACHED });
+
+  if (posts && posts[slug] && posts[slug].html) {
+    dispatch({ type: FETCH_POST_CACHED });
     return;
   }
 
-  dispatch({ type: FETCH_ARTICLE_REQUEST });
+  dispatch({ type: FETCH_POST_REQUEST });
 
   if (!slug) {
-    dispatch({ type: FETCH_ARTICLE_ERROR, msg: '[Actions -> fetchArticle:] The parameter slug error!' });
+    dispatch({ type: FETCH_POST_ERROR, msg: '[Actions -> fetchArticle:] The parameter slug error!' });
   }
 
-  const api = `${API_PREFIX}/article?slug=${slug}`;
+  const api = `${API_PREFIX}/post?slug=${slug}`;
   axios.get(api).then(({ data }) => {
     if (data.code !== 0) {
-      dispatch({ type: FETCH_ARTICLE_ERROR, msg: data.msg });
+      dispatch({ type: FETCH_POST_ERROR, msg: data.msg });
       return;
     }
     dispatch({
-      type: FETCH_ARTICLE_SUCCESS,
-      data: {
-        slug,
-        post: data.data.post,
-      },
+      type: FETCH_POST_SUCCESS,
+      data: data.data.posts,
     });
   }).catch((error) => {
-    dispatch({ type: FETCH_ARTICLE_ERROR, msg: error });
+    dispatch({ type: FETCH_POST_ERROR, msg: error });
   });
 };

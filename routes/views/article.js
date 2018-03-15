@@ -1,21 +1,24 @@
+const _ = require('lodash');
 const router = require('koa-router')();
-const { getOnePost } = require('../../controllers');
+const { getAllPosts } = require('../../controllers');
 
 router.prefix('/article');
 
 router.get('/:slug', async (ctx, next) => {
   console.log('--- Dealing with /article/:title route');  // eslint-disable-line
-
   const { slug } = ctx.params;
-  const info = await getOnePost(slug);
+  const posts = getAllPosts();
 
-  if (info) {
-    delete info.content;
-    delete info.brief;
-    ctx.reactState = Object.assign({}, {
-      posts: { [slug]: info },
-    }, ctx.reactState);
-  }
+  Object.keys(posts).forEach((key) => {
+    delete posts[key].content;
+    if (key !== slug) {
+      delete posts[key].html;
+    }
+  });
+
+  ctx.reactState = _.merge({
+    posts,
+  }, ctx.reactState);
 
   await next();
 });

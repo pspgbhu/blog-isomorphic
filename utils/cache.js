@@ -1,9 +1,9 @@
 const { slugList, readFileAndParse } = require('./posts');
-const getAllCategories = require('../controllers/getAllCategories');
+
 
 exports.cacheSomeData = async () => {
   await exports.cacheAllPosts();
-  exports.cacheOverviews();
+  exports.cacheSlugsOrder();
 };
 
 /**
@@ -24,8 +24,9 @@ exports.cacheAllPosts = async () => {
 /**
  * 缓存首页预览信息
  */
-exports.cacheOverviews = () => {
+exports.cacheSlugsOrder = () => {
   const arr = [];
+
   global.cache.postsCache.forEach((value) => {
     const obj = Object.assign({}, value);
     delete obj.content;
@@ -39,7 +40,7 @@ exports.cacheOverviews = () => {
     return bdate - adate;
   });
 
-  global.cache.overviewsCache = new Set(arr);
+  global.cache.slugsOrder = arr.map(obj => obj.slug);
 };
 
 

@@ -41,7 +41,7 @@ const App = ({ matchSlug }) => (
 // export default App;
 
 function mapStateToProps(state) {
-  const matchSlug = state.slugList;
+  const matchSlug = state.slugsList;
   return {
     matchSlug: matchSlug.join('|'),
   };

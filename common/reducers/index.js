@@ -1,21 +1,30 @@
 import { combineReducers } from 'redux';
-import article from './article';
+import posts from './posts';
 
 export default combineReducers({
-  posts: article,
-  overviewList(state = []) {
-    return state;
-  },
-  slugList(state = []) {
-    return state;
-  },
-  categories(state = []) {
-    return state;
-  },
-  archives(state = []) {
-    return state;
-  },
-  tags(state = []) {
-    return state;
-  },
+  posts,
+  archives: createReducer([]),
+  tags: createReducer([]),
+  categories: createReducer([]),
+  slugsList: createReducer([]),
 });
+
+
+function createReducer(p) {
+  let init;
+  switch (Object.prototype.toString.call(p)) {
+    case '[object Array]':
+      init = [];
+      break;
+    case '[object String]':
+      init = '';
+      break;
+    default:
+      init = {};
+      break;
+  }
+
+  return function reducer(state = init) {
+    return state;
+  };
+}

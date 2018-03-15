@@ -1,20 +1,19 @@
+const _ = require('lodash');
 const router = require('koa-router')();
 const { createStore, applyMiddleware } = require('redux');
 const thunk = require('redux-thunk').default;
 const routeArticle = require('./article');
-const routeHome = require('./home');
 const renderStaticHtml = require('../../utils/render').default;
 const reducers = require('../../common/reducers').default;
 const {
-  getSlugList,
-  getOverviews,
+  getAllPosts,
   getAllCategories,
-  getArchives,
   getAllTags,
+  getArchives,
+  getSlugsOrder,
 } = require('../../controllers');
 
 router.use(routeArticle.routes());
-router.use(routeHome.routes());
 
 
 /**
@@ -41,12 +40,20 @@ router.get('*', filterPageRoute, serverState, async (ctx) => {
  * 生成服务端 redux state
  */
 async function serverState(ctx, next) {
-  ctx.reactState = Object.assign({
-    overviewList: getOverviews(),
-    slugList: await getSlugList(),
-    categories: getAllCategories(),
-    archives: getArchives(),
+  console.log('--- Dealing with serverState router middleware');
+  const posts = getAllPosts();
+
+  Object.keys(posts).forEach((key) => {
+    delete posts[key].content;
+    delete posts[key].html;
+  });
+
+  ctx.reactState = _.merge({
+    posts,
     tags: getAllTags(),
+    archives: getArchives(),
+    slugsList: getSlugsOrder(),
+    categories: getAllCategories(),
   }, ctx.reactState);
 
   await next();

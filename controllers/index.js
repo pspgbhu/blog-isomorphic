@@ -1,7 +1,9 @@
 
-exports.getOnePost = require('./getOnePost');
-exports.getOverviews = require('./getOverviews');
-exports.getSlugList = require('./getSlugList');
-exports.getAllCategories = require('./getAllCategories');
-exports.getArchives = require('./getArchives');
+exports.getAllPosts = require('./getAllPosts');
 exports.getAllTags = require('./getAllTags');
+exports.getAllCategories = require('./getAllCategories');
+
+exports.getArchives = require('./getArchives');
+exports.getPost = require('./getPost');
+exports.getSlugList = require('./getSlugList');
+exports.getSlugsOrder = require('./getSlugsOrder');
