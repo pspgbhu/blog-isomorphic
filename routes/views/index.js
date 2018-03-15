@@ -9,6 +9,8 @@ const {
   getSlugList,
   getOverviews,
   getAllCategories,
+  getArchives,
+  getAllTags,
 } = require('../../controllers');
 
 router.use(routeArticle.routes());
@@ -36,13 +38,15 @@ router.get('*', filterPageRoute, serverState, async (ctx) => {
 
 
 /**
- * 生成服务端的 redux state
+ * 生成服务端 redux state
  */
 async function serverState(ctx, next) {
   ctx.reactState = Object.assign({
     overviewList: getOverviews(),
     slugList: await getSlugList(),
     categories: getAllCategories(),
+    archives: getArchives(),
+    tags: getAllTags(),
   }, ctx.reactState);
 
   await next();

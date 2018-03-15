@@ -3,11 +3,8 @@ const { getOverviews } = require('../../controllers');
 
 router.get('/', async (ctx, next) => {
   console.log('--- Dealing with HOME route');  // eslint-disable-line
-
-  ctx.reactState = Object.assign({
-    overviewList: getOverviews(),
-  }, ctx.reactState);
-
+  // ctx.reactState = Object.assign({
+  // }, ctx.reactState);
   await next();
 });
 

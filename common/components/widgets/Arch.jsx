@@ -1,8 +1,29 @@
 import React from 'react';
+import { withRouter, Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
 import Widget from '../Widget';
 
-const WidgetArch = () => (
-  <Widget title="归档"></Widget>
+function mapStateToProps(state) {
+  return {
+    archives: state.archives,
+  };
+}
+
+const WidgetArch = ({ archives }) => (
+  <Widget title="归档">
+    <ul className="archive-list">
+      { archives && archives.map(({ date, number, link }) => (
+        <li className="archive-list-item" key={date}>
+          <Link to={link} className="archive-list-link">
+            <i className="fa" aria-hidden="true">{date}</i>
+          </Link>
+          <span className="archive-list-count">{number}</span>
+        </li>
+      ))}
+    </ul>
+  </Widget>
 );
 
-export default WidgetArch;
+
+export default withRouter(connect(mapStateToProps)(WidgetArch));

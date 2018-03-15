@@ -4,7 +4,6 @@ const getAllCategories = require('../controllers/getAllCategories');
 exports.cacheSomeData = async () => {
   await exports.cacheAllPosts();
   exports.cacheOverviews();
-  getAllCategories();
 };
 
 /**

@@ -12,4 +12,10 @@ export default combineReducers({
   categories(state = []) {
     return state;
   },
+  archives(state = []) {
+    return state;
+  },
+  tags(state = []) {
+    return state;
+  },
 });
