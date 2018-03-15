@@ -20,9 +20,9 @@ export const fetchArticle = slug => (dispatch, getState) => {
     dispatch({ type: FETCH_POST_ERROR, msg: '[Actions -> fetchArticle:] The parameter slug error!' });
   }
 
-  const api = `${API_PREFIX}/post?slug=${slug}`;
+  const api = `${API_PREFIX}/article?slug=${slug}`;
   axios.get(api).then(({ data }) => {
-    if (data.code !== 0) {
+    if (data.code !== 0 || !data.data.posts.length) {
       dispatch({ type: FETCH_POST_ERROR, msg: data.msg });
       return;
     }

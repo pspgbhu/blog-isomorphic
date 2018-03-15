@@ -1,9 +1,9 @@
 const router = require('koa-router')();
-const post = require('./post');
+const article = require('./article');
 
 router.prefix('/api');
 
-router.use(post.routes());
+router.use(article.routes());
 
 router.get('*', async (ctx) => {
   console.log('--- Dealing with /api route');
