@@ -26,6 +26,6 @@ export default (state = {}, action) => {
 
 function descapeHtml(source) {
   return source
-    .replace(/&gt/g, '>')
-    .replace(/&lt/g, '<');
+    .replace(/&__gt;/g, '>')
+    .replace(/&__lt;/g, '<');
 }

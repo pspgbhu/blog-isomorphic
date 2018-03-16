@@ -8,6 +8,8 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import NotFound from './pages/404';
 import Article from './pages/Article';
+import Categories from './pages/Categories';
+import Tags from './pages/Tags';
 
 require('./style/_style.less');
 
@@ -29,6 +31,8 @@ const App = ({ matchSlug }) => (
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path={`/article/:slug(${matchSlug})`} component={Article} />
+            <Route exact path="/categories/:categories" component={Categories} />
+            <Route exact path="/tags/:tags" component={Tags} />
             <Route component={NotFound} />
           </Switch>
         </div>

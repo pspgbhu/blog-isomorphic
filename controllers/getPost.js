@@ -36,9 +36,10 @@ module.exports = (p) => {
   return null;
 };
 
+
 function escapeHtml(html) {
   if (!html) return html;
   return html
-    .replace(/>/g, '&gt')
-    .replace(/</g, '&lt');
+    .replace(/>/g, '&__gt;')
+    .replace(/</g, '&__lt;');
 }

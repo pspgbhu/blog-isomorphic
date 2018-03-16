@@ -1,10 +1,10 @@
 import React from 'react';
 import Aside from '../components/Aside';
-import Post from '../containers/Post';
+import OvlistBy from '../containers/OvlistBy';
 
-const Article = () => (
+const Categories = () => (
   <div>
-    <Post/>
+    <OvlistBy by="categories" />
     <Aside
       social
       categories
@@ -14,4 +14,4 @@ const Article = () => (
   </div>
 );
 
-export default Article;
+export default Categories;

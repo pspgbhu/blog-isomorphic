@@ -19,7 +19,7 @@ const Ovlist = ({ slugsList, posts }) => {
     return (
       <Viewblock
         key={slug}
-        title={posts[slug].title}
+        title={title}
         categories={categories}
         tags={tags}
         date={date}

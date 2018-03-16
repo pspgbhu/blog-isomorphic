@@ -1,12 +1,11 @@
 import React from 'react';
-import Ovlist from '../containers/Ovlist';
+import HomeOvlist from '../containers/HomeOvlist';
 import Aside from '../components/Aside';
 
 const Home = () => (
   <div>
-    <Ovlist />
+    <HomeOvlist />
     <Aside
-      search
       social
       categories
       arch
