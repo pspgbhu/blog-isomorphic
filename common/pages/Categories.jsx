@@ -6,10 +6,10 @@ const Categories = () => (
   <div>
     <OvlistBy by="categories" />
     <Aside
-      social
       categories
       arch
       tags
+      social
     />
   </div>
 );

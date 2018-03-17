@@ -6,10 +6,10 @@ const Home = () => (
   <div>
     <HomeOvlist />
     <Aside
-      social
       categories
       arch
       tags
+      social
     />
   </div>
 );

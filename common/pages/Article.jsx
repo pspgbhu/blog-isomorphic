@@ -6,10 +6,10 @@ const Article = () => (
   <div>
     <Post/>
     <Aside
-      social
       categories
       arch
       tags
+      social
     />
   </div>
 );

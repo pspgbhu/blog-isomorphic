@@ -11,10 +11,10 @@ const Aside = ({
 }) => (
   <aside className="col-md-4 sidebar">
     { search && (<WidgetSearch/>)}
-    { social && (<WidgetSocial/>)}
     { categories && (<WidgetCate/>)}
     { arch && (<WidgetArch/>)}
     { tags && (<WidgetTags/>)}
+    { social && (<WidgetSocial/>)}
   </aside>
 );
 
