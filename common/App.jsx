@@ -10,6 +10,7 @@ import NotFound from './pages/404';
 import Article from './pages/Article';
 import Categories from './pages/Categories';
 import Tags from './pages/Tags';
+import ArchivesList from './containers/ArchivesList';
 
 require('./style/_style.less');
 
@@ -33,6 +34,8 @@ const App = ({ matchSlug }) => (
             <Route exact path={`/article/:slug(${matchSlug})`} component={Article} />
             <Route exact path="/categories/:categories" component={Categories} />
             <Route exact path="/tags/:tags" component={Tags} />
+            <Route exact path="/archives/:year" component={ArchivesList} />
+            <Route exact path="/archives/:year/:month" component={ArchivesList} />
             <Route component={NotFound} />
           </Switch>
         </div>
