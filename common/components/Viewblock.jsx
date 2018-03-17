@@ -1,25 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import dateFormat from 'dateformat';
+import { formatdate } from '../utils';
 
 const Viewblock = ({
   title, categories, tags, date, brief, img, slug,
 }) => (
   <article className="post">
     <div className="post-media">
-      <a>
-        <img className="img-ajax" src={img}
-          alt="title"
-        />
-      </a>
+      {/* <div className="img img-ajax" style={{
+        background: 'center center no-repeat',
+        backgroundSize: 'cover',
+        backgroundImage: `url(${img})`,
+      }}></div> */}
+      <img className="img" src={img} />
     </div>
     <div className="post-content post-overview">
       <div className="post-head home-post-head">
         <h1 className="post-title">
           <Link to={`/article/${slug}`}>{title}</Link>
         </h1>
-        <div className="post-meta">• <time className="post-date" title="">{dateFormat(date, 'yyyy年mm月dd日')}</time>
+        <div className="post-meta">• <time className="post-date" title="">{formatdate(date, 'yyyy年mm月dd日')}</time>
         </div>
       </div>
       <p className="brief">
@@ -46,7 +47,7 @@ const Viewblock = ({
           <span className="fa-wrap">
             <i className="fa fa-clock-o"></i>
             <span> </span>
-            <span className="date-meta">{dateFormat(date, 'yyyy/mm/dd')}</span>
+            <span className="date-meta">{formatdate(date, 'yyyy/mm/dd')}</span>
           </span>
         </div>
       </div>
@@ -57,6 +58,7 @@ const Viewblock = ({
     </footer>
   </article>
 );
+
 
 Viewblock.propTypes = {
   title: PropTypes.string.isRequired,

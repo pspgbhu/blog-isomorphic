@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { formatdate } from '../utils';
 
 const Post = ({
   title, categories, tags, date, html,
@@ -31,7 +32,7 @@ const Post = ({
 
           <span className="fa-wrap">
             <i className="fa fa-clock-o"></i>
-            <span className="date-meta"> {date}</span>
+            <span className="date-meta"> {formatdate(date, 'yyyy/mm/dd')}</span>
           </span>
 
           {/* <span className="fa-wrap">
@@ -69,8 +70,5 @@ const Post = ({
   </main>
 );
 
-Post.propTypes = {
-
-};
 
 export default Post;
