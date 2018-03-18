@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { API_PREFIX } from '../config';
 
 export const FETCH_POST_REQUEST = 'fetch_article_requset';
 export const FETCH_POST_ERROR = 'fetch_post_error';
@@ -20,7 +19,7 @@ export const fetchArticle = slug => (dispatch, getState) => {
     dispatch({ type: FETCH_POST_ERROR, msg: '[Actions -> fetchArticle:] The parameter slug error!' });
   }
 
-  const api = `${API_PREFIX}/article?slug=${slug}`;
+  const api = `/api/article?slug=${slug}`;
   axios.get(api).then(({ data }) => {
     if (data.code !== 0 || !data.data.posts.length) {
       dispatch({ type: FETCH_POST_ERROR, msg: data.msg });
