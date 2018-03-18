@@ -14,6 +14,7 @@ function mapStateToProps(state, props) {
       tags: post.tags,
       date: post.date,
       html: post.html,
+      slug: props.match.params.slug,
     };
   }
 
@@ -23,6 +24,7 @@ function mapStateToProps(state, props) {
     tags: [],
     date: '',
     html: '',
+    slug: '',
   };
 }
 
@@ -32,9 +34,12 @@ class Post extends Component {
     this.props.dispatch(fetchArticle(this.props.match.params.slug));
   }
 
+  componentDidMount() {
+  }
+
   render() {
     const {
-      title, categories, tags, date, html,
+      title, categories, tags, date, html, slug,
     } = this.props;
     let postView = null;
 
@@ -46,6 +51,8 @@ class Post extends Component {
           tags={tags}
           date={date}
           html={html}
+          slug={slug}
+          didMount={this.highlight.bind(this)}
         />
       );
     } else {
@@ -53,6 +60,35 @@ class Post extends Component {
     }
 
     return postView;
+  }
+
+  highlight() {
+    if (window.hljs) {
+      document.querySelectorAll('pre code').forEach((block) => {
+        window.hljs.highlightBlock(block);
+      });
+      return;
+    }
+
+    this.downloadHL(() => {
+      window.hljs.initHighlighting();
+    });
+  }
+
+  downloadHL(cb) {
+    const script = document.createElement('script');
+    script.src = '//static.pspgbhu.me/common/highlight.pack.js';
+    const link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.href = '//static.pspgbhu.me/common/googlecode/googlecode.min.css';
+
+    document.body.appendChild(link);
+    document.body.appendChild(script);
+    script.onload = () => {
+      if (cb) {
+        cb();
+      }
+    };
   }
 }
 
