@@ -32,16 +32,17 @@ const Viewblock = ({
         <div className="post-meta">
           <span className="categories-meta fa-wrap">
             <i className="fa fa-folder-open-o"></i>
-            <span> </span>
             { categories && categories.map(item => (
-              <span key={item}>{item} </span>
+              <span key={item}>
+                <Link to={`/categories/${item}/`}>{item}</Link> </span>
             ))}
           </span>
           <span className="fa-wrap">
             <i className="fa fa-tags"></i>
             <span> </span>
             { tags && tags.map(tag => (
-              <span className="tags-meta" key={tag}>{tag} </span>
+              <span className="tags-meta" key={tag}>
+                <Link to={`/tags/${tag}/`}>{tag}</Link> </span>
             ))}
           </span>
           <span className="fa-wrap">

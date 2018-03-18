@@ -31,7 +31,7 @@ const Ovlist = ({ slugsList, posts }) => {
   });
 
   return (
-    <main className="col-md-8 main-content">
+    <main className="col-md-9 main-content">
       {list}
     </main>
   );

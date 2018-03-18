@@ -21,7 +21,7 @@ class Post extends Component {
       title, categories, tags, date, html, slug,
     } = this.props;
     return (
-      <main className="col-md-8 main-content m-post">
+      <main className="col-md-9 main-content m-post">
         <article className="post">
           <div className="post-head">
             <h1 id={title}>
@@ -32,18 +32,18 @@ class Post extends Component {
                 <i className="fa fa-folder-open-o"></i>
                 <span> </span>
                 { categories && categories.map(item => (
-                  <span key={item}>{item} </span>
+                  <span key={item}>
+                    <Link to={`/categories/${item}/`}>{item}</Link> </span>
                 ))}
               </span>
 
               <span className="fa-wrap">
                 <i className="fa fa-tags"></i>
-                <span className="tags-meta">
                 <span> </span>
-                { tags && tags.map(item => (
-                  <span key={item}>{item} </span>
+                { tags && tags.map(tag => (
+                  <span className="tags-meta" key={tag}>
+                    <Link to={`/tags/${tag}/`}>{tag}</Link> </span>
                 ))}
-                </span>
               </span>
 
               <span className="fa-wrap">

@@ -49,7 +49,7 @@ class CategoriesOvlist extends Component {
     });
 
     return (
-      <main className="col-md-8 main-content">
+      <main className="col-md-9 main-content">
         <h3>{matching}</h3>
         {list}
       </main>

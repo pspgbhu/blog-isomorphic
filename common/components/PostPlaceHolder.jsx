@@ -1,7 +1,7 @@
 import React from 'react';
 
 const PostPlaceHolder = () => (
-  <main className="col-md-8 main-content m-placeholder">
+  <main className="col-md-9 main-content m-placeholder">
     <article className="post">
       <div className="post-head">
         <h1 className="holdblock">

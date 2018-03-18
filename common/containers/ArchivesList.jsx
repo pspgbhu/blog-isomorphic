@@ -33,7 +33,7 @@ function mapStateToProps(state, ownProps) {
 class ArchivesList extends Component {
   render() {
     return (
-      <main className="col-md-8 main-content">
+      <main className="col-md-9 main-content">
         <ArchivesListCom filterSlugs={this.props.filterSlugs} posts={this.props.posts} />
       </main>
     );

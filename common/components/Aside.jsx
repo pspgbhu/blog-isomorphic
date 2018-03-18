@@ -9,7 +9,7 @@ import WidgetTags from './widgets/Tags';
 const Aside = ({
   search, social, categories, arch, tags,
 }) => (
-  <aside className="col-md-4 sidebar">
+  <aside className="col-md-3 sidebar">
     { search && (<WidgetSearch/>)}
     { categories && (<WidgetCate/>)}
     { arch && (<WidgetArch/>)}
