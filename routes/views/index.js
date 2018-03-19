@@ -73,14 +73,12 @@ async function pageTitle(ctx, next) {
       ctx.title = `${global.cache.postsCache.get(rst[2]).title} | ${BLOG_NAME}`;
       break;
     case 'categories':
-      console.log('分类', rst[2]);
       ctx.title = `分类：${rst[2]} | ${BLOG_NAME}`;
       break;
     case 'archives':
       ctx.title = `归档：${rst[2]}${rst[3] ? '/' + rst[3] : ''} | ${BLOG_NAME}`;
       break;
     case 'tags':
-      console.log('标签', rst[2]);
       ctx.title = `标签：${rst[2]} | ${BLOG_NAME}`;
       break;
     case '/':

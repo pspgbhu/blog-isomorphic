@@ -10,7 +10,7 @@ function mapStateToProps(state, ownProps) {
     ? ownProps.by
     : 'categories';
 
-  const matching = ownProps.match.params[by];
+  const matching = decodeURI(ownProps.match.params[by]);
 
   const cateSlugs = slugsList.map((slug) => {
     const cates = posts[slug][by];
@@ -30,6 +30,7 @@ function mapStateToProps(state, ownProps) {
 class CategoriesOvlist extends Component {
   render() {
     const { posts, cateSlugs, matching } = this.props;
+
     const list = cateSlugs.map((slug) => {
       const {
         title, categories, tags, date, brief, img,
