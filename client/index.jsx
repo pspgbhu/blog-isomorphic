@@ -16,6 +16,7 @@ import reducer from '../common/reducers';
 
 import App from '../common/App';
 import ScrollToTop from './ScrollToTop';
+import Title from './Title';
 
 // 通过服务端注入的全局变量得到初始的 state
 const preloadedState = window.__INITIAL_STATE_;
@@ -29,7 +30,9 @@ hydrate(
   <Provider store={store}>
     <BrowserRouter>
       <ScrollToTop>
-        <App></App>
+        <Title>
+          <App></App>
+        </Title>
       </ScrollToTop>
     </BrowserRouter>
   </Provider>,
