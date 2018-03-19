@@ -12,14 +12,14 @@ const {
   getArchives,
   getSlugsOrder,
 } = require('../../controllers');
+const BLOG_NAME = 'Pspgbhu 的博客';
 
 router.use(routeArticle.routes());
-
 
 /**
  * 统一处理默认页面
  */
-router.get('*', filterPageRoute, serverState, async (ctx) => {
+router.get('*', filterPageRoute, serverState, pageTitle, async (ctx) => {
   console.log('--- Dealing with * route'); // eslint-disable-line
 
   const store = createStore(reducers, ctx.reactState, applyMiddleware(thunk));
@@ -28,7 +28,7 @@ router.get('*', filterPageRoute, serverState, async (ctx) => {
   const preloadedState = store.getState();
 
   await ctx.render('index', {
-    title: ctx.reactTitle || 'Pspgbhu 的博客',
+    title: ctx.title || BLOG_NAME,
     NODE_ENV: process.env.NODE_ENV,
     html: content,
     state: JSON.stringify(preloadedState),
@@ -59,6 +59,39 @@ async function serverState(ctx, next) {
   await next();
 }
 
+
+async function pageTitle(ctx, next) {
+  console.log('--- Dealing with title router middleware');
+  const rst = decodeURIComponent(ctx.path).match(/^\/(\w+)\/?([^?/#]+)?\/?([^?/#]+)?/);
+  if (!rst || !rst[1]) {
+    await next();
+    return;
+  }
+
+  switch (rst[1]) {
+    case 'article':
+      ctx.title = `${global.cache.postsCache.get(rst[2]).title} | ${BLOG_NAME}`;
+      break;
+    case 'categories':
+      console.log('分类', rst[2]);
+      ctx.title = `分类：${rst[2]} | ${BLOG_NAME}`;
+      break;
+    case 'archives':
+      ctx.title = `归档：${rst[2]}${rst[3] ? '/' + rst[3] : ''} | ${BLOG_NAME}`;
+      break;
+    case 'tags':
+      console.log('标签', rst[2]);
+      ctx.title = `标签：${rst[2]} | ${BLOG_NAME}`;
+      break;
+    case '/':
+      ctx.title = BLOG_NAME;
+      break;
+    default:
+      ctx.title = BLOG_NAME;
+  }
+
+  await next();
+}
 
 /**
  * 将那些不属于页面地址的链接过滤出去，不进行路由处理。
