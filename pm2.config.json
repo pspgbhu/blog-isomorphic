@@ -4,7 +4,7 @@
   "watch": false,
   "env": {
       "NODE_ENV": "production",
-      "PORT": "3000"
+      "PORT": "3123"
   },
   "out_file": "/export/Logs/react-isomorphic/out.log",
   "error_file": "/export/Logs/react-isomorphic/err.log",
