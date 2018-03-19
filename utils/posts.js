@@ -36,12 +36,12 @@ exports.readFileAndParse = async (slug) => {
   return info;
 };
 
-
 /**
  * @returns 返回 /posts/*.md 的文件列表数组
  */
 exports.slugList = async () => {
   const mds = await readdir(path.resolve('../blog-article-backup/_posts'));
+  console.log('markdown list:', mds);
 
   const slugs = mds.map((md) => {
     const rst = /(.*)\.md$/.exec(md);
