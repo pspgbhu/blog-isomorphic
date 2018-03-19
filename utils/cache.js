@@ -11,7 +11,6 @@ exports.cacheSomeData = async () => {
  */
 exports.cacheAllPosts = async () => {
   const slugs = await slugList();
-
   await Promise.all(slugs.map(async (slug) => {
     const info = await readFileAndParse(slug);
     if (info) {

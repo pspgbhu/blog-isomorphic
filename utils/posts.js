@@ -1,8 +1,9 @@
 const path = require('path');
 const fs = require('fs');
 const util = require('util');
-const Parser = require('../lib/parser');
 const dateFormat = require('dateformat');
+const Parser = require('../utils/parser');
+const { POST_PATH } = require('../config');
 
 const readFile = util.promisify(fs.readFile);
 const readdir = util.promisify(fs.readdir);
@@ -18,8 +19,8 @@ exports.readFileAndParse = async (slug) => {
 
   try {
     const filename = `${slug}.md`;
-    raw = await readFile(path.join('posts', filename), { encoding: 'UTF-8' });
-    stats = await stat(path.join('posts', filename));
+    raw = await readFile(path.join(POST_PATH, filename), { encoding: 'UTF-8' });
+    stats = await stat(path.join(POST_PATH, filename));
   } catch (error) {
     return null;
   }
@@ -40,7 +41,7 @@ exports.readFileAndParse = async (slug) => {
  * @returns 返回 /posts/*.md 的文件列表数组
  */
 exports.slugList = async () => {
-  const mds = await readdir(path.resolve('../blog-article-backup/_posts'));
+  const mds = await readdir(POST_PATH);
   console.log('markdown list:', mds);
 
   const slugs = mds.map((md) => {
