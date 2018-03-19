@@ -10,5 +10,5 @@
   "error_file": "/export/Logs/react-isomorphic/err.log",
   "merge_logs": true,
   "log_date_format": "YYYY-MM-DD HH:mm Z",
-  "max_memory_restart" : "512M"
+  "max_memory_restart" : "384M"
 }
