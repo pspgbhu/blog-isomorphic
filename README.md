@@ -2,7 +2,7 @@
 
 Koa2 + React + React-Router + Redux
 
-## Todo
+## Todos
 
 ### Optimize
 
