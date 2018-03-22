@@ -7,7 +7,7 @@ Koa2 + React + React-Router + Redux
 ### Optimize
 
 - [ ] Redux store 首屏数据量的优化
-  - [ ] 非首页打开页面时，不直接吐出首屏数据
+  - [ ] 非首页打开页面时，不直接吐出首屏数据（需要增加首页未加载数据时的 placeholder）
 
 ### Features
 
