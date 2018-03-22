@@ -11,31 +11,27 @@
     <meta name="format-detection" content="telephone=no,email=no,adress=no">
     <meta name="browsermode" content="application">
     <meta name="screen-orientation" content="portrait">
-
     <meta name="keywords" content="pspgbhu,blog,博客,个人主页">
     <meta name="description" content="pspgbhu的个人主页">
     <meta name="author" content="pspgbhu">
     <meta name="contact" content="brotherchun001@gmail.com>">
     <link rel="shortcut icon" href="http://static.pspgbhu.me/favicon.jpg">
-
-    <script>
-      var _hmt = _hmt || [];
-      (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?d070ebb446fed478ed891d81a815bd3d";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-      })();
-    </script>
-
-
-    <title><%= title %></title>
-
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
     <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
+    <title><%= title %></title>
+
     <% if(NODE_ENV === 'production' || NODE_ENV === 'clientrender') { %>
       <link rel='stylesheet' href='/css/style.css' />
+      <script>
+        var _hmt = _hmt || [];
+        (function() {
+          var hm = document.createElement("script");
+          hm.src = "https://hm.baidu.com/hm.js?d070ebb446fed478ed891d81a815bd3d";
+          var s = document.getElementsByTagName("script")[0];
+          s.parentNode.insertBefore(hm, s);
+        })();
+      </script>
     <% } %>
 
   </head>
