@@ -2,14 +2,14 @@
 
 Koa2 + React + React-Router + Redux
 
-## Todo
+## Todos
 
-## Optimize
+### Optimize
 
 - [ ] Redux store 首屏数据量的优化
   - [ ] 非首页打开页面时，不直接吐出首屏数据
 
-## Features
+### Features
 
 - [ ] 留言 畅言
 - [ ] 阅读量
