@@ -9,7 +9,7 @@ const Footer = props => (
                 <span>Copyright © 2017
                 </span> |
                 <span>
-                  <a className="copyright-links" target="_blank" rel="nofollow" href="http://www.miitbeian.gov.cn/">陕ICP备17007121号</a>
+                  {/* <a className="copyright-links" target="_blank" rel="nofollow" href="http://www.miitbeian.gov.cn/">陕ICP备17007121号</a> */}
                 </span> |
                 <span>
                     <a href="//pspgbhu.me" className="copyright-links" rel="nofollow">Pspgbhu's Site</a>
