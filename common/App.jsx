@@ -5,8 +5,9 @@ import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 
-import Home from './pages/Home';
 import NotFound from './pages/404';
+import Home from './pages/Home';
+import About from './pages/About';
 import Article from './pages/Article';
 import Categories from './pages/Categories';
 import Tags from './pages/Tags';
@@ -18,9 +19,11 @@ const navList = [
   {
     name: '首页',
     link: '/',
+  }, {
+    name: '关于',
+    link: '/about',
   },
 ];
-
 
 const App = ({ matchSlug }) => (
   <div>
@@ -31,6 +34,7 @@ const App = ({ matchSlug }) => (
         <div className="row">
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
             <Route exact path={`/article/:slug(${matchSlug})`} component={Article} />
             <Route exact path="/categories/:categories" component={Categories} />
             <Route exact path="/tags/:tags" component={Tags} />

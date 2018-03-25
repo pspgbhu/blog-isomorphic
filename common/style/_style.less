@@ -77,10 +77,11 @@ a {
     color: @white_color;
     .transition(all 0.2s ease-in-out);
     &:hover, &:focus {
-        .border(@btn_hover);
-        background: @btn_hover;
+        .border(@theme_color);
+        background: @theme_color;
         color: @white_color;
         outline: none;
+        opacity: 0.75;
     }
 }
 .btn-default[disabled] {
@@ -193,6 +194,9 @@ pre {
     img {
         width: 100%;
     }
+}
+.wboard {
+    background: @white_color;
 }
 
 /*====================================================
@@ -846,6 +850,7 @@ pre {
     padding: .1px 20px;
     margin-bottom:20px;
 }
+
 /* prev and next link */
 .prev-next-wrap {
     margin-bottom: 25px;
