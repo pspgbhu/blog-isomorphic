@@ -1,32 +1,56 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import className from 'classnames';
 
+class Nav extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      mnavShow: false,
+    };
+  }
 
-const Nav = ({ navList }) => (
-  <nav className="main-navigation">
-    <div className="container">
-      <div className="row">
-        <div className="col-sm-12">
-          <div className="navbar-header"><span className="nav-toggle-button collapsed" data-toggle="collapse" data-target="#main-menu" id="mnav">
-            <span className="sr-only">Toggle navigation</span>
-            <i className="fa fa-bars"></i>
-          </span>
-          </div>
-          <div className="collapse navbar-collapse" id="main-menu">
-            <ul className="menu">
-              <li role="presentation">
-                { navList.map(item => (
-                  <Link key={item.link} to={item.link}><i className="fa fa-fw"></i>{item.name}</Link>
-                ))}
-              </li>
-            </ul>
+  render() {
+    const { mnavShow } = this.state;
+    const { navList } = this.props;
+    return (
+      <nav className="main-navigation">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12">
+              <div className="navbar-header">
+                <span
+                  className="nav-toggle-button collapsed"
+                  data-toggle="collapse"
+                  data-target="#main-menu"
+                  onClick={() => {
+                    this.setState({ mnavShow: !this.state.mnavShow });
+                  }}
+                >
+                <span className="sr-only">Toggle navigation</span>
+                <i className="fa fa-bars"></i>
+              </span>
+              </div>
+              <div
+                className={className('collapse', 'navbar-collapse', { in: mnavShow })}
+                id="main-menu"
+              >
+                <ul className="menu">
+                  { navList.map(item => (
+                    <li role="presentation" key={item.link}>
+                      <Link to={item.link}><i className="fa fa-fw"></i>{item.name}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
-  </nav>
-);
+      </nav>
+    );
+  }
+}
 
 Nav.propTypes = {
   navList: PropTypes.array.isRequired,
