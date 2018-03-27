@@ -75,7 +75,7 @@ class Parser {
 
   _parseToBrief() {
     const $ = cheerio.load(`${this.html}`);
-    const text = $.text().trim().replace(/\n/g, ' ').substr(0, 180);
+    const text = $.text().trim().replace(/\n/g, ' ').substr(0, 200);
     this.brief = text;
   }
 
