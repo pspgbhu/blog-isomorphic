@@ -49,6 +49,7 @@ const config = merge(baseConfig, {
               loader: require.resolve('less-loader'),
             },
           ],
+          publicPath: '../',
         }),
       },
     ],
