@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import PostCom from '../components/Post';
 import { fetchArticle } from '../actions/fetchArticle';
 import PostPlaceHolder from '../components/PostPlaceHolder';
+import Comments from '../components/Comments';
 
 function mapStateToProps(state, props) {
   if (state.posts && state.posts[props.match.params.slug]) {
@@ -34,32 +35,29 @@ class Post extends Component {
     this.props.dispatch(fetchArticle(this.props.match.params.slug));
   }
 
-  componentDidMount() {
-  }
-
   render() {
     const {
       title, categories, tags, date, html, slug,
     } = this.props;
-    let postView = null;
 
     if (html) {
-      postView = (
-        <PostCom
-          title={title}
-          categories={categories}
-          tags={tags}
-          date={date}
-          html={html}
-          slug={slug}
-          didMount={this.highlight.bind(this)}
-        />
+      return (
+        <main className="col-md-9 main-content m-post">
+          <PostCom
+            title={title}
+            categories={categories}
+            tags={tags}
+            date={date}
+            html={html}
+            slug={slug}
+            didMount={this.highlight.bind(this)}
+          />
+          <Comments slug={slug}/>
+        </main>
       );
-    } else {
-      postView = <PostPlaceHolder />;
     }
 
-    return postView;
+    return <PostPlaceHolder />;
   }
 
   highlight() {
