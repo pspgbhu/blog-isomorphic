@@ -1,17 +1,12 @@
-# 同构直出 Blog
+# Pspgbhu's Blog
 
-Koa2 + React + React-Router + Redux
+本项目使用了 [react-isomorphic 服务端渲染脚手架]() 快速搭建了基于 React + Koa2 系列技术栈的 React 服务端渲染项目架构。
 
 ## Todos
 
-### Optimize
-
-- [ ] Redux store 首屏数据量的优化
-  - [ ] 非首页打开页面时，不直接吐出首屏数据（需要增加首页未加载数据时的 placeholder）
-
 ### Features
 
-- [ ] 留言 畅言
+- [x] 留言，Powered by gitment
 - [ ] 阅读量
-- [ ] 分页
+- [ ] 首页分页
 - [ ] 搜索
