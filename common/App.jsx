@@ -11,7 +11,7 @@ import About from './pages/About';
 import Article from './pages/Article';
 import Categories from './pages/Categories';
 import Tags from './pages/Tags';
-import ArchivesList from './containers/ArchivesList';
+import Archives from './pages/Archives';
 
 require('./style/_style.less');
 
@@ -38,8 +38,8 @@ const App = ({ matchSlug }) => (
             <Route exact path={`/article/:slug(${matchSlug})`} component={Article} />
             <Route exact path="/categories/:categories" component={Categories} />
             <Route exact path="/tags/:tags" component={Tags} />
-            <Route exact path="/archives/:year" component={ArchivesList} />
-            <Route exact path="/archives/:year/:month" component={ArchivesList} />
+            <Route exact path="/archives/:year" component={Archives} />
+            <Route exact path="/archives/:year/:month" component={Archives} />
             <Route component={NotFound} />
           </Switch>
         </div>
