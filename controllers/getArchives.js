@@ -1,10 +1,5 @@
 const dateFormat = require('dateformat');
 
-// dateFormat.i18n.monthNames = [
-//   '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月',
-//   '一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月',
-// ];
-
 module.exports = () => {
   const arch = new Map();
 
@@ -17,13 +12,13 @@ module.exports = () => {
     arch.set(key, {
       date: value.date,
       number: 1,
-      // timestamp: dateFormat(value.date, new Date(value.date).getTime()),
+      timestamp: dateFormat(value.date, new Date(value.date).getTime()),
       link: `/archives/${dateFormat(value.date, 'yyyy/mm')}`,
     });
   });
 
   const arr = [];
-  arch.forEach((value, key) => {
+  arch.forEach((value) => {
     arr.push({
       date: value.date,
       number: value.number,

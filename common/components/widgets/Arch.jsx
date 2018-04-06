@@ -16,7 +16,7 @@ const WidgetArch = ({ archives }) => (
       { archives && archives.map(({ date, number, link }) => (
         <li className="archive-list-item" key={date}>
           <Link to={link} className="archive-list-link">
-            <i className="fa" aria-hidden="true">{formatdate(date, 'mm yyyy', 'zh')}</i>
+            <i className="fa" aria-hidden="true">{formatdate(date, 'yyyy年 mm', 'zh')}</i>
           </Link>
           <span className="archive-list-count">{number}</span>
         </li>
