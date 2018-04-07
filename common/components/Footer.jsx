@@ -6,7 +6,7 @@ const Footer = props => (
     <div className="container">
         <div className="row">
             <div className="col-sm-12">
-                <span>Copyright © 2017
+                <span>Copyright © 2017-2018
                 </span>|
                 <span>
                     <a href="//pspgbhu.me" className="copyright-links" rel="nofollow">Pspgbhu's Site</a>
