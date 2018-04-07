@@ -13,7 +13,7 @@ const {
   getSlugsOrder,
 } = require('../../controllers');
 
-const BLOG_NAME = 'Pspgbhu 的博客';
+const HOME_TITLE = 'Pspgbhu 的博客';
 
 router.use(routeArticle.routes());
 
@@ -29,7 +29,7 @@ router.get('*', filterPageRoute, serverState, pageTitle, async (ctx) => {
   const preloadedState = store.getState();
 
   await ctx.render('index', {
-    title: ctx.title || BLOG_NAME,
+    title: ctx.title || HOME_TITLE,
     NODE_ENV: process.env.NODE_ENV,
     html: content,
     state: JSON.stringify(preloadedState),

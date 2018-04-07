@@ -16,21 +16,11 @@ class Title extends Component {
     }
   }
 
-  reportPagePV() {
-    if (window._hmt) {
-      window._hmt.push(['_trackPageview', this.props.location.pathname]);
-    }
-    if (window.gtag) {
-      window.gtag('config', 'UA-117000274-1', {
-        page_path: this.props.location.pathname,
-      });
-    }
-  }
-
   changeTitle() {
+    const HOME_TITLE = 'Pspgbhu 的博客';
     // 首页
     if (this.props.location.pathname === '/') {
-      document.title = 'Pspgbhu 的博客';
+      document.title = HOME_TITLE;
       return;
     }
 
@@ -38,17 +28,20 @@ class Title extends Component {
       regExp: new RegExp(/\/article\/([\w-]*)/), // article
       title: (rst) => {
         const { title } = this.props.posts[rst[1]];
-        return title ? `${title} | Pspgbhu 的博客` : 'Pspgbhu 的博客';
+        return title ? `${title} | ${HOME_TITLE}` : HOME_TITLE;
       },
     }, {
-      regExp: new RegExp(/\/categories\/([\w-]*)/), // categories
-      title: rst => `分类：${rst[1]} | Pspgbhu 的博客`,
+      regExp: new RegExp(/^\/categories\/([\w-]*)/), // categories
+      title: rst => `分类：${rst[1]} | ${HOME_TITLE}`,
     }, {
       regExp: new RegExp(/^\/archives\/(\d+(?:\/\d*))/), // archives
-      title: rst => `归档：${rst[1]} | Pspgbhu 的博客`,
+      title: rst => `归档：${rst[1]} | ${HOME_TITLE}`,
     }, {
-      regExp: new RegExp(/\/tags\/([\w-]*)/), // tags
-      title: rst => `标签：${rst[1]} | Pspgbhu 的博客`,
+      regExp: new RegExp(/^\/tags\/([\w-]*)/), // tags
+      title: rst => `标签：${rst[1]} | ${HOME_TITLE}`,
+    }, {
+      regExp: new RegExp(/^\/about/), // about
+      title: () => `关于 | ${HOME_TITLE}`,
     }];
 
     let done = false;
@@ -64,6 +57,17 @@ class Title extends Component {
       }
       done = true;
     });
+  }
+
+  reportPagePV() {
+    if (window._hmt) {
+      window._hmt.push(['_trackPageview', this.props.location.pathname]);
+    }
+    if (window.gtag) {
+      window.gtag('config', 'UA-117000274-1', {
+        page_path: this.props.location.pathname,
+      });
+    }
   }
 
   render() {
