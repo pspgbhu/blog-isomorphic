@@ -71,22 +71,25 @@ async function pageTitle(ctx, next) {
 
   switch (rst[1]) {
     case 'article':
-      ctx.title = `${global.cache.postsCache.get(rst[2]).title} | ${BLOG_NAME}`;
+      ctx.title = `${global.cache.postsCache.get(rst[2]).title} | ${HOME_TITLE}`;
       break;
     case 'categories':
-      ctx.title = `分类：${rst[2]} | ${BLOG_NAME}`;
+      ctx.title = `分类：${rst[2]} | ${HOME_TITLE}`;
       break;
     case 'archives':
-      ctx.title = `归档：${rst[2]}${rst[3] ? '/' + rst[3] : ''} | ${BLOG_NAME}`;
+      ctx.title = `归档：${rst[2]}${rst[3] ? '/' + rst[3] : ''} | ${HOME_TITLE}`;
       break;
     case 'tags':
-      ctx.title = `标签：${rst[2]} | ${BLOG_NAME}`;
+      ctx.title = `标签：${rst[2]} | ${HOME_TITLE}`;
+      break;
+    case 'about':
+      ctx.title = `关于 | ${HOME_TITLE}`;
       break;
     case '/':
-      ctx.title = BLOG_NAME;
+      ctx.title = HOME_TITLE;
       break;
     default:
-      ctx.title = BLOG_NAME;
+      ctx.title = HOME_TITLE;
   }
 
   await next();
