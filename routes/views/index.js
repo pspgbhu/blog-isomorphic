@@ -12,6 +12,7 @@ const {
   getArchives,
   getSlugsOrder,
 } = require('../../controllers');
+const { getTitle } = require('../../common/utils');
 
 const HOME_TITLE = 'Pspgbhu 的博客';
 
@@ -64,33 +65,8 @@ async function serverState(ctx, next) {
 async function pageTitle(ctx, next) {
   console.log('--- Dealing with title router middleware');
   const rst = decodeURIComponent(ctx.path).match(/^\/(\w+)\/?([^?/#]+)?\/?([^?/#]+)?/);
-  if (!rst || !rst[1]) {
-    await next();
-    return;
-  }
 
-  switch (rst[1]) {
-    case 'article':
-      ctx.title = `${global.cache.postsCache.get(rst[2]).title} | ${HOME_TITLE}`;
-      break;
-    case 'categories':
-      ctx.title = `分类：${rst[2]} | ${HOME_TITLE}`;
-      break;
-    case 'archives':
-      ctx.title = `归档：${rst[2]}${rst[3] ? '/' + rst[3] : ''} | ${HOME_TITLE}`;
-      break;
-    case 'tags':
-      ctx.title = `标签：${rst[2]} | ${HOME_TITLE}`;
-      break;
-    case 'about':
-      ctx.title = `关于 | ${HOME_TITLE}`;
-      break;
-    case '/':
-      ctx.title = HOME_TITLE;
-      break;
-    default:
-      ctx.title = HOME_TITLE;
-  }
+  ctx.title = getTitle(ctx.path, { postsCache: global.cache.postsCache });
 
   await next();
 }

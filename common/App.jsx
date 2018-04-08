@@ -34,12 +34,13 @@ const App = ({ matchSlug }) => (
         <div className="row">
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/about" component={About} />
+            <Route exact path={'/article'} component={Home} />
             <Route exact path={`/article/:slug(${matchSlug})`} component={Article} />
             <Route exact path="/categories/:categories" component={Categories} />
             <Route exact path="/tags/:tags" component={Tags} />
             <Route exact path="/archives/:year" component={Archives} />
             <Route exact path="/archives/:year/:month" component={Archives} />
+            <Route path="/about" component={About} />
             <Route component={NotFound} />
           </Switch>
         </div>
