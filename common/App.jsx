@@ -1,9 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
+
 import Header from './components/Header';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
+import Backtop from './components/Backtop';
 
 import NotFound from './pages/404';
 import Home from './pages/Home';
@@ -15,6 +17,7 @@ import Archives from './pages/Archives';
 
 require('./style/_style.less');
 
+// 顶部导航栏
 const navList = [
   {
     name: '首页',
@@ -47,6 +50,7 @@ const App = ({ matchSlug }) => (
       </div>
     </section>
     <Footer />
+    <Backtop />
   </div>
 );
 

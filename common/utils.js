@@ -1,3 +1,10 @@
+/**
+ * 格式化输出时间
+ *
+ * @param {String} date timestamp
+ * @param {String} format output format. 'yyyy年mm月xx日'
+ * @param {String} locale 'zh' will replace 'mm' to '某月'
+ */
 export const formatdate = (date, format, locale) => {
   const d = new Date(date);
   const year = d.getFullYear();
@@ -22,6 +29,11 @@ export const formatdate = (date, format, locale) => {
 };
 
 
+/**
+ * 根据 url 计算页面的 title
+ * @param {String} pathname location.href.pathname
+ * @param {Object} details { postCache }
+ */
 export const getTitle = (pathname, { postsCache }) => {
   const HOME_TITLE = 'Pspgbhu 的博客';
 
@@ -72,4 +84,23 @@ export const getTitle = (pathname, { postsCache }) => {
     default:
       return HOME_TITLE;
   }
+};
+
+
+/**
+ *
+ * @param {Number} intervalTime
+ */
+export const Throttle = (intervalTime) => {
+  const f = function throttle(cb) {
+    const now = Date.now();
+    // 如果已经记录过上一次成功执行回调的时间了，就暂时先不再记录
+    f.lastExecTime = f.lastExecTime || now;
+
+    if (now - f.lastExecTime >= intervalTime) {
+      cb && cb();
+      f.lastExecTime = now;
+    }
+  };
+  return f;
 };
