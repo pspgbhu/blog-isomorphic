@@ -7,7 +7,7 @@
   "scripts": {
     "start": "cross-env NODE_ENV=production node bin/www",
     "build": "node build/build.js ",
-    "prd": "pm2 start pm2.config.json",
+    "prd": "pm2 start server/pm2.config.json",
     "dev": "./node_modules/.bin/nodemon bin/www"
   },
   "dependencies": {
