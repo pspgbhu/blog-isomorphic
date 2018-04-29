@@ -10,6 +10,7 @@ import Backtop from './components/Backtop';
 import NotFound from './pages/404';
 import Home from './pages/Home';
 import About from './pages/About';
+import Projects from './pages/Projects';
 import Article from './pages/Article';
 import Categories from './pages/Categories';
 import Tags from './pages/Tags';
@@ -22,6 +23,9 @@ const navList = [
   {
     name: '首页',
     link: '/',
+  }, {
+    name: '开源项目',
+    link: '/projects',
   }, {
     name: '关于',
     link: '/about',
@@ -44,6 +48,7 @@ const App = ({ matchSlug }) => (
             <Route exact path="/archives/:year" component={Archives} />
             <Route exact path="/archives/:year/:month" component={Archives} />
             <Route path="/about" component={About} />
+            <Route path="/projects" component={Projects} />
             <Route component={NotFound} />
           </Switch>
         </div>
