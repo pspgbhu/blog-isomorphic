@@ -1,7 +1,10 @@
+const chalk = require('chalk');
 const path = require('path');
 const webpack = require('webpack');
 
 const rootPath = path.resolve(__dirname, '../');
+
+console.log(chalk.yellow('NODE_ENV:', process.env.NODE_ENV));
 
 const config = {
   entry: {
@@ -9,8 +12,9 @@ const config = {
   },
 
   output: {
-    path: path.resolve(rootPath, 'public'),
+    path: path.resolve(rootPath, 'server/public'),
     filename: 'js/app.js',
+    publicPath: '/',
   },
 
   resolve: {
@@ -30,6 +34,7 @@ const config = {
           // directory for faster rebuilds.
           cacheDirectory: true,
         },
+        exclude: /node_modules/,
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,

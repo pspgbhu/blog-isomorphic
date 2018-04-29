@@ -4,7 +4,7 @@ const { createStore, applyMiddleware } = require('redux');
 const thunk = require('redux-thunk').default;
 const routeArticle = require('./article');
 const renderStaticHtml = require('../../utils/render').default;
-const reducers = require('../../common/reducers').default;
+const reducers = require('../../../common/reducers').default;
 const {
   getAllPosts,
   getAllCategories,
@@ -12,7 +12,7 @@ const {
   getArchives,
   getSlugsOrder,
 } = require('../../controllers');
-const { getTitle } = require('../../common/utils');
+const { getTitle } = require('../../../common/utils');
 
 const HOME_TITLE = 'Pspgbhu 的博客';
 

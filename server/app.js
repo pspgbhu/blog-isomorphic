@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const path = require('path');
 const Koa = require('koa');
 const views = require('koa-views');
@@ -6,6 +7,7 @@ const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser');
 const logger = require('koa-logger');
 const serve = require('koa-static');
+const webpackDevServer = require('./middlewares/webpackDevServer');
 const index = require('./routes');
 const { cacheSomeData } = require('./utils');
 
@@ -19,10 +21,6 @@ global.cache = {
 // 异步缓存各种数据
 cacheSomeData();
 
-// setTimeout(() => {
-//   console.log('[global.cache.postsCache]:', global.cache.postsCache.keys());
-// }, 1000);
-
 // error handler
 onerror(app);
 
@@ -35,11 +33,10 @@ app.use(logger());
 
 console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
 
-/**
- * 非生产环境下，.dev 中的静态资源会覆盖 public 中的资源
- */
+// webpackDevServer
 if (process.env.NODE_ENV !== 'production') {
-  app.use(serve(path.join(__dirname, '.dev')));
+  console.log(chalk.yellow('NOTICE: You are running application in development environment!'));
+  webpackDevServer(app);
 }
 
 app.use(serve(path.join(__dirname, 'public')));
