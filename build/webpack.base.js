@@ -63,19 +63,6 @@ const config = {
     ],
   },
 
-  optimization: {
-    splitChunks: {
-      cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
-          name: 'vendor',
-          chunks: 'all',
-          filename: 'js/vendor.js',
-        },
-      },
-    },
-  },
-
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
