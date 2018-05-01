@@ -12,9 +12,11 @@ function mapStateToProps(state) {
 class Title extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
-
       this.changeTitle();
-      this.reportPagePV();
+      this.reportPagePV([
+        'baidu',
+        // 'google',
+      ]);
     }
   }
 
@@ -27,15 +29,30 @@ class Title extends Component {
     document.title = title;
   }
 
-  reportPagePV() {
-    if (window._hmt) {
-      window._hmt.push(['_trackPageview', this.props.location.pathname]);
-    }
-    if (window.gtag) {
-      window.gtag('config', 'UA-117000274-1', {
-        page_path: this.props.location.pathname,
-      });
-    }
+  /**
+   * 上报 SPA 的页面跳转
+   */
+  reportPagePV(analytics) {
+    analytics.forEach(item => this.reporters[item], this);
+  }
+
+  /**
+   * baidu & google SPA analytics
+   */
+  reporters = {
+    baidu() {
+      if (window._hmt) {
+        window._hmt.push(['_trackPageview', this.props.location.pathname]);
+      }
+    },
+
+    google() {
+      if (window.gtag) {
+        window.gtag('config', 'UA-117000274-1', {
+          page_path: this.props.location.pathname,
+        });
+      }
+    },
   }
 
   render() {

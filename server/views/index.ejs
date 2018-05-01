@@ -11,44 +11,20 @@
     <meta name="format-detection" content="telephone=no,email=no,adress=no">
     <meta name="browsermode" content="application">
     <meta name="screen-orientation" content="portrait">
+    <link rel="shortcut icon" href="http://static.pspgbhu.me/favicon.jpg">
     <!-- seo -->
     <meta name="keywords" content="pspgbhu的主站,pspgbhu的个人主页,pspgbhu博客,blog,博客,个人主页">
     <meta name="description" content="pspgbhu的博客">
     <meta name="author" content="pspgbhu">
     <meta name="contact" content="brotherchun001@gmail.com>">
-    <!-- google-site-verification  -->
-    <meta name="google-site-verification" content="VKgvW4JYWjJWFl5P6JYITPFShTerkMFEgeIXOTTkA9k" />
-    <link rel="shortcut icon" href="http://static.pspgbhu.me/favicon.jpg">
+    <!-- <%- include analytics/google %> -->
+    <%- include analytics/baidu %>
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css?rev=3.3.4">
     <link rel="stylesheet" href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <title><%= title %></title>
-
-    <% if(NODE_ENV === 'production' || NODE_ENV === 'clientrender') { %>
+    <% if(NODE_ENV === 'production') { %>
       <link rel='stylesheet' href='/css/style.css' />
-
-      <!-- Baidu Analytics -->
-      <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "https://hm.baidu.com/hm.js?d070ebb446fed478ed891d81a815bd3d";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-      </script>
-
-      <!-- Global site tag (gtag.js) - Google Analytics -->
-      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-117000274-1"></script>
-      <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-117000274-1');
-      </script>
     <% } %>
-
+    <title><%= title %></title>
   </head>
   <body>
     <div id="app"><%- html %></div>
