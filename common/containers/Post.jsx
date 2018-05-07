@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PostCom from '../components/Post';
 import { fetchArticle } from '../actions/fetchArticle';
 import PostPlaceHolder from '../components/PostPlaceHolder';
-import Comments from '../components/Comments';
+// import Comments from '../components/Comments';
 
 function mapStateToProps(state, props) {
   if (state.posts && state.posts[props.match.params.slug]) {
@@ -52,7 +52,6 @@ class Post extends Component {
             slug={slug}
             didMount={this.highlight.bind(this)}
           />
-          <Comments slug={slug}/>
         </main>
       );
     }
