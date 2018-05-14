@@ -11,7 +11,7 @@ const stat = util.promisify(fs.stat);
 
 /**
  * 读取文件并解析 markdown
- * @returns 返回解析结果
+ * @returns 返回 markdown 解析结果及相关文件信息
  */
 exports.readFileAndParse = async (slug) => {
   let raw;
@@ -32,6 +32,7 @@ exports.readFileAndParse = async (slug) => {
     html: parse.html,
     brief: parse.brief,
     slug,
+    stats,
   }, parse.info);
 
   return info;
@@ -40,6 +41,7 @@ exports.readFileAndParse = async (slug) => {
 /**
  * @returns 返回 /posts/*.md 的文件列表数组
  */
+
 exports.slugList = async () => {
   const mds = await readdir(POST_PATH);
   console.log('markdown list:', mds);
