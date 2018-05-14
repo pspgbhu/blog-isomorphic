@@ -32,6 +32,9 @@
     <script>
       window.__INITIAL_STATE_ = <%- state %>;
     </script>
+    <% if(NODE_ENV === 'production') { %>
+      <script src="/js/vendors.js"></script>
+    <% } %>
     <script src="/js/app.js"></script>
   </body>
 </html>
