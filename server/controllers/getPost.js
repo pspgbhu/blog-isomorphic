@@ -1,12 +1,14 @@
+
 /**
  * 获取单篇文章的信息
  * @param {String} slug 文件名，不用包含后缀
  */
+
 module.exports = (p) => {
-  console.log('--- [controllers getPost]', p, typeof p);
+  const { posts } = require('../db/db.json');
 
   if (typeof p === 'string') {
-    const post = global.cache.postsCache.get(p);
+    const post = posts[p];
     if (!post) {
       return [];
     }
@@ -20,7 +22,7 @@ module.exports = (p) => {
 
   if (Array.isArray(p)) {
     const rst = p.map((slug) => {
-      const post = global.cache.postsCache.get(slug);
+      const post = posts[slug];
       if (!post) {
         return null;
       }

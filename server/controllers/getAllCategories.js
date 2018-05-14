@@ -1,11 +1,15 @@
 /**
- * 返回全部标签分类
+ * 返回全部标签分类，并按照名称进行排序
  */
+
 module.exports = () => {
+  const { posts } = require('../db/db.json');
   const cates = new Map();
-  // 遍历全部缓存的文章
-  global.cache.postsCache.forEach((value) => {
-    // 遍历每篇文章的分类
+
+  Object.keys(posts).forEach((key) => {
+    const value = posts[key];
+
+    // 收集全部的文章分类，并且记录每个分类下的文章个数
     value.categories.forEach((cate) => {
       if (cates.has(cate)) {
         cates.get(cate).number += 1;

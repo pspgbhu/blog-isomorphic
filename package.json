@@ -50,7 +50,8 @@
     "koa-webpack": "^3.0.2",
     "less": "^3.0.1",
     "less-loader": "^4.0.6",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.10",
+    "log4js": "^2.6.0",
     "lowdb": "^1.0.0",
     "node-notifier": "^5.2.1",
     "opn": "^5.2.0",
@@ -89,7 +90,8 @@
       "build",
       ".dev",
       ".git",
-      "node_modules/**/node_modules"
+      "node_modules/**/node_modules",
+      "db.json"
     ],
     "ext": "js json jsx ejs",
     "env": {

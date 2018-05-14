@@ -64,9 +64,10 @@ async function serverState(ctx, next) {
 
 async function pageTitle(ctx, next) {
   console.log('--- Dealing with title router middleware');
+  const { posts } = require('../../db/db.json');
   const rst = decodeURIComponent(ctx.path).match(/^\/(\w+)\/?([^?/#]+)?\/?([^?/#]+)?/);
 
-  ctx.title = getTitle(ctx.path, { postsCache: global.cache.postsCache });
+  ctx.title = getTitle(ctx.path, { posts });
 
   await next();
 }

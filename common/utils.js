@@ -1,10 +1,11 @@
 /**
  * 格式化输出时间
  *
- * @param {String} date timestamp
- * @param {String} format output format. 'yyyy年mm月xx日'
- * @param {String} locale 'zh' will replace 'mm' to '某月'
+ * @param {String}  date    timestamp
+ * @param {String}  format  output format. 'yyyy年mm月xx日'
+ * @param {String}  locale  'zh' will replace 'mm' to '某月'
  */
+
 export const formatdate = (date, format, locale) => {
   const d = new Date(date);
   const year = d.getFullYear();
@@ -31,10 +32,12 @@ export const formatdate = (date, format, locale) => {
 
 /**
  * 根据 url 计算页面的 title
- * @param {String} pathname location.href.pathname
- * @param {Object} details { postCache }
+ *
+ * @param {String}  pathname  location.href.pathname
+ * @param {Object}  details   { postCache }
  */
-export const getTitle = (pathname, { postsCache }) => {
+
+export const getTitle = (pathname, { posts }) => {
   const HOME_TITLE = 'Pspgbhu 的博客';
 
   /**
@@ -54,11 +57,7 @@ export const getTitle = (pathname, { postsCache }) => {
   switch (rst[1]) {
     case 'article':
       if (!rst[2]) return HOME_TITLE;
-      if (Object.prototype.toString.call(postsCache) === '[object Map]') {
-        article = postsCache.get(rst[2]);
-      } else {
-        article = postsCache[rst[2]];
-      }
+      article = posts[rst[2]];
       if (!article || !article.title) return HOME_TITLE;
 
       return `${article.title} | ${HOME_TITLE}`;
@@ -88,9 +87,9 @@ export const getTitle = (pathname, { postsCache }) => {
 
 
 /**
- *
  * @param {Number} intervalTime
  */
+
 export const Throttle = (intervalTime) => {
   const f = function throttle(cb) {
     const now = Date.now();

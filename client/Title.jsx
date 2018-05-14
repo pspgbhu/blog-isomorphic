@@ -23,7 +23,7 @@ class Title extends Component {
   changeTitle() {
     const title = getTitle(
       this.props.location.pathname,
-      { postsCache: this.props.posts },
+      { posts: this.props.posts },
     );
 
     document.title = title;

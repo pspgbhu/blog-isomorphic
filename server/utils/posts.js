@@ -44,7 +44,6 @@ exports.readFileAndParse = async (slug) => {
 
 exports.slugList = async () => {
   const mds = await readdir(POST_PATH);
-  console.log('markdown list:', mds);
 
   const slugs = mds.map((md) => {
     const rst = /(.*)\.md$/.exec(md);

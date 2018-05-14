@@ -1,8 +1,5 @@
-
 module.exports = () => {
-  const posts = {};
-  global.cache.postsCache.forEach((value, key) => {
-    posts[key] = JSON.parse(JSON.stringify(value));
-  });
-  return posts;
+  const { posts } = require('../db/db.json');
+  // 深拷贝
+  return JSON.parse(JSON.stringify(posts));
 };

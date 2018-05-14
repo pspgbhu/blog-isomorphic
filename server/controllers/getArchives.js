@@ -1,15 +1,21 @@
 const dateFormat = require('dateformat');
 
+/**
+ * 获取归档信息。按照日期来归档。
+ */
+
 module.exports = () => {
+  const { posts } = require('../db/db.json');
   const arch = new Map();
 
-  global.cache.postsCache.forEach((value) => {
-    const key = dateFormat(value.date, 'mmmm yyyy');
-    if (arch.has(key)) {
-      arch.get(key).number += 1;
+  Object.keys(posts).forEach((key) => {
+    const value = posts[key];
+    const formatdate = dateFormat(value.date, 'mmmm yyyy');
+    if (arch.has(formatdate)) {
+      arch.get(formatdate).number += 1;
       return;
     }
-    arch.set(key, {
+    arch.set(formatdate, {
       date: value.date,
       number: 1,
       timestamp: dateFormat(value.date, new Date(value.date).getTime()),

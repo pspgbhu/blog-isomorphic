@@ -23,11 +23,6 @@ console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
 
 const app = new Koa();
 
-global.cache = {
-  postsCache: new Map(),
-  slugsOrder: [],
-};
-
 // 异步缓存各种数据
 cacheSomeData();
 
