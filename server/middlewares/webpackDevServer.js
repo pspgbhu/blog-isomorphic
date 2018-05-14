@@ -8,5 +8,13 @@ module.exports = (app) => {
   app.use(koaWebpack({
     compiler,
     hot: false,
+    dev: {
+      stats: {
+        colors: true,
+        cached: true,
+        cachedAssets: true,
+        modules: false,
+      },
+    },
   }));
 };
