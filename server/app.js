@@ -12,7 +12,6 @@ const loggerConfig = require('./config/logger');
 const index = require('./routes');
 const webpackDevServer = require('./middlewares/webpackDevServer');
 const log = require('./middlewares/log');
-const { cacheSomeData } = require('./utils');
 
 configure(loggerConfig);
 
@@ -22,9 +21,6 @@ require('./init/initDatabasePosts')();
 console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
 
 const app = new Koa();
-
-// 异步缓存各种数据
-cacheSomeData();
 
 // error handler
 onerror(app);
