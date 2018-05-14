@@ -5,12 +5,16 @@ const views = require('koa-views');
 const json = require('koa-json');
 const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser');
-const logger = require('koa-logger');
+const koaLogger = require('koa-logger');
 const serve = require('koa-static');
+const { configure } = require('log4js');
+const loggerConfig = require('./config/logger');
+const index = require('./routes');
 const webpackDevServer = require('./middlewares/webpackDevServer');
 const log = require('./middlewares/log');
-const index = require('./routes');
 const { cacheSomeData } = require('./utils');
+
+configure(loggerConfig);
 
 // 初始化 db.json 中的 posts 数据
 require('./init/initDatabasePosts')();
@@ -35,7 +39,7 @@ app.use(bodyparser({
   enableTypes: ['json', 'form', 'text'],
 }));
 app.use(json());
-app.use(logger());
+app.use(koaLogger());
 
 // webpackDevServer
 if (process.env.NODE_ENV !== 'production') {
