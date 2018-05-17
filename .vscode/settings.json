@@ -7,9 +7,5 @@
   "files.trimTrailingWhitespace": true,
   "editor.tabSize": 2,
   "editor.insertSpaces": true,
-  "[javascript]": {
-    "editor.formatOnSave": false,
-  },
   "files.insertFinalNewline": true,
-  "editor.detectIndentation": false
 }
