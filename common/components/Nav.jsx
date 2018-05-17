@@ -39,7 +39,7 @@ class Nav extends Component {
                 <ul className="menu">
                   { navList.map(item => (
                     <li role="presentation" key={item.link}>
-                      <Link to={item.link}><i className="fa fa-fw"></i>{item.name}</Link>
+                      <Link to={item.link}>{item.name}</Link>
                     </li>
                   ))}
                 </ul>

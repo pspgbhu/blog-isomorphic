@@ -1,5 +1,4 @@
 @import '../../style/_variable.less';
-
 .projects {
     &-block {
         padding: 0 20px 20px;
@@ -19,6 +18,11 @@
             a {
                 color: @black_color;
             }
+        }
+        &-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
     }
 }

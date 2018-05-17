@@ -15,7 +15,11 @@ export default class Projects extends Component {
     return (
       <main className="projects">
         {this.state.list.map(item => (
-          <div key={item.name} className="col-sm-4 projects-block">
+          <div key={item.name} className="
+            col-sm-6
+            col-md-4
+            projects-block
+          ">
             <article className="projects-item">
               <a href={item.link}>
                 <div
@@ -27,7 +31,7 @@ export default class Projects extends Component {
               </a>
               <div className="projects-desc">
                 <h3 className="projects-desc-title"><a href={item.link}>{item.name}</a></h3>
-                <p>{item.desc}</p>
+                <p className="projects-desc-text" title={item.desc}>{item.desc}</p>
               </div>
             </article>
           </div>
