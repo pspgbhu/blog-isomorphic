@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Throttle } from '../../utils';
+import { Throttle, now } from '../../utils';
 
 require('./backtop.less');
 
@@ -35,6 +35,34 @@ export default class componentName extends Component {
   }
 
   toTop = () => {
-    window.scrollTo(0, 0);
+    const speed = 3000;
+    const distance = window.scrollY;
+    const startTime = now();
+    let done = false;
+
+    const animation = () => {
+      if (done) return;
+
+      const usedTime = now() - startTime;
+      const d = this.formula(usedTime, speed, distance);
+      window.scrollTo(0, d);
+
+      if (d <= 0) done = true;
+
+      window.requestAnimationFrame(() => animation());
+    };
+    animation();
+  }
+
+  /**
+   *
+   * @param   {Number}  ut      used time
+   * @param   {Number}  speed   total time
+   * @param   {Number}  d       total distance
+   * @return  {Number}          应该移动的距离
+   */
+
+  formula(ut, tt, d) {
+    return d * ((tt - (ut ** 1.25)) / tt);
   }
 }
