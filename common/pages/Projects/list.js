@@ -20,5 +20,10 @@ export default [
     desc: '具备下载 GitHub 仓库中部分文件夹的能力',
     link: 'https://github.com/pspgbhu/github-download-parts',
     image: 'http://static.zybuluo.com/pspgbhu/8a6qm5mqh12o960090d4uide/github.png',
+  }, {
+    name: 'Frames Sprite Maker',
+    desc: '在线逐帧动画雪碧图生成器',
+    link: 'https://pspgbhu.github.io/fsm/',
+    image: 'http://static.zybuluo.com/pspgbhu/qbip5fxv71uyzf6smkewx90s/frames.png',
   },
 ];
