@@ -11,7 +11,7 @@ const {
   getAllTags,
   getArchives,
   getSlugsOrder,
-} = require('../../controllers');
+} = require('../../service');
 const { getTitle } = require('../../../common/utils');
 
 const HOME_TITLE = 'Pspgbhu 的博客';

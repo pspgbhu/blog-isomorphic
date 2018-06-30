@@ -1,6 +1,6 @@
 const _ = require('lodash');
 const router = require('koa-router')();
-const { getAllPosts } = require('../../controllers');
+const { getAllPosts } = require('../../service');
 
 router.prefix('/article');
 

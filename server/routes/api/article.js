@@ -1,5 +1,5 @@
 const router = require('koa-router')();
-const { getPost } = require('../../controllers');
+const { getPost } = require('../../service');
 
 router.get('/article', async (ctx, next) => {
   console.log('--- Dealing with /api/article route');
