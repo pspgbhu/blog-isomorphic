@@ -1,24 +1,25 @@
 const router = require('koa-router')();
+const { getPost } = require('../../service');
 const { Res, EresCode, EresMsg } = require('../utils');
 const { getLogger } = require('log4js');
-const { getPost } = require('../../service');
 
-const logger = getLogger('/api/article');
+const logger = getLogger('/api/brief');
 
-router.get('/article', async (ctx, next) => {
+router.get('/brief', async (ctx, next) => {
   logger.trace('in route');
   ctx.body = new Res();
 
   const { slug } = ctx.query;
-
   if (!slug) {
     ctx.body.code = EresCode.PARAMETER_ERROR;
-    ctx.body.msg = 'Missing \'slug\' parameter.';
+    ctx.body.msg = 'Missing \'brief\' parameter';
     return;
   }
 
   ctx.body.code = 0;
-  const posts = getPost(slug.split(','), ['html']);
+  const posts = getPost(slug.split(','), ['brief']);
+
+  logger.info('getPost %o', posts);
 
   if (!posts || !posts.length) {
     ctx.body.msg = '没有查找到对应的文章';

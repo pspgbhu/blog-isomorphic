@@ -11,6 +11,7 @@ const { configure } = require('log4js');
 const loggerConfig = require('./config/logger');
 const index = require('./routes');
 const webpackDevServer = require('./middlewares/webpackDevServer');
+const apiError = require('./middlewares/apiError');
 const log = require('./middlewares/log');
 
 configure(loggerConfig);
@@ -45,6 +46,8 @@ app.use(views(path.join(__dirname, 'views'), {
   },
   extension: 'ejs',
 }));
+
+app.use(apiError());
 app.use(index.routes(), index.allowedMethods());
 
 app.on('error', (err, ctx) => {
