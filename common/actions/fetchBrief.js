@@ -1,0 +1,44 @@
+import axios from 'axios';
+
+export const FETCH_BRIEF_REQUEST = 'fetch_brief_requset';
+export const FETCH_BRIEF_ERROR = 'fetch_brief_error';
+export const FETCH_BRIEF_SUCCESS = 'fetch_brief_success';
+export const FETCH_BRIEF_CACHED = 'fetch_brief_cached';
+
+export const fetchBrief = (num = 0) => (dispatch, getState) => {
+  const { posts, slugsList } = getState();
+  const needFetch = [];
+  const number = num || slugsList.length - 1;
+
+  slugsList.forEach((slug, index) => {
+    if (index > number) return;
+    if (!posts || !posts[slug] || !posts[slug].brief) {
+      needFetch.push(slug);
+    }
+  });
+
+  if (needFetch.length === 0) {
+    dispatch({ type: FETCH_BRIEF_CACHED });
+    return Promise.resolve();
+  }
+
+  dispatch({ type: FETCH_BRIEF_REQUEST });
+
+  const api = `/api/brief?slug=${needFetch.join(',')}`;
+  return new Promise((resolve, reject) => {
+    axios.get(api).then(({ data }) => {
+      if (data.code !== 0 || !data.data.posts.length) {
+        dispatch({ type: FETCH_BRIEF_ERROR, msg: data.msg });
+        return reject();
+      }
+      dispatch({
+        type: FETCH_BRIEF_SUCCESS,
+        data: data.data.posts,
+      });
+      resolve();
+    }).catch((error) => {
+      dispatch({ type: FETCH_BRIEF_ERROR, msg: error });
+      reject();
+    });
+  });
+};

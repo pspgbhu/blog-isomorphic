@@ -4,4 +4,4 @@ exports.getAllCategories = require('./getAllCategories');
 exports.getArchives = require('./getArchives');
 exports.getPost = require('./getPost');
 exports.getSlugList = require('./getSlugList');
-exports.getSlugsOrder = require('./getSlugsOrder');
+exports.getSlugsOrdered = require('./getSlugsOrdered');

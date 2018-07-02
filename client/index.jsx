@@ -21,11 +21,14 @@ import Title from './Title';
 // 通过服务端注入的全局变量得到初始的 state
 const preloadedState = window.__INITIAL_STATE_;
 
-const middlewares = [thunk];
+const middlewares = [
+  thunk,
+  logger,
+];
 
-if (process.env.NODE_ENV !== 'production') {
-  middlewares.push(logger);
-}
+// if (process.env.NODE_ENV !== 'production') {
+//   middlewares.push(logger);
+// }
 
 const store = createStore(reducer, preloadedState, applyMiddleware(...middlewares));
 

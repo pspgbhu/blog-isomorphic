@@ -90,21 +90,37 @@ export const getTitle = (pathname, { posts }) => {
  * @param {Number} intervalTime
  */
 
-export const Throttle = (intervalTime) => {
+export const Throttle = (intervalTime, opts = { execLastOne: false }) => {
+  const { execLastOne } = opts;
+
   const f = function throttle(cb) {
     const now = Date.now();
+
+    // 保存最后一个执行函数
+    let lastFn = cb;
+
     // 如果已经记录过上一次成功执行回调的时间了，就暂时先不再记录
-    f.lastExecTime = f.lastExecTime || now;
+    // 第一次执行的时候，为 lastExecTime 赋值
+    f.lastExecTime = f.lastExecTime || 0;
 
     if (now - f.lastExecTime >= intervalTime) {
       cb && cb();
       f.lastExecTime = now;
+      lastFn = null;
+    }
+
+    if (execLastOne && lastFn) {
+      clearTimeout(f.timer);
+      // 保证最后一个函数可以被执行
+      f.timer = setTimeout(() => {
+        lastFn && lastFn();
+      }, intervalTime);
     }
   };
   return f;
 };
 
 
-export const now = () => {
-  return Date.now ? Date.now() : (new Date().getTime());
-};
+export const now = () => (
+  Date.now ? Date.now() : (new Date().getTime())
+);

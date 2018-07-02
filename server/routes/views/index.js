@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const router = require('koa-router')();
+const { getLogger } = require('log4js');
 const { createStore, applyMiddleware } = require('redux');
 const thunk = require('redux-thunk').default;
 const routeArticle = require('./article');
@@ -10,9 +11,11 @@ const {
   getAllCategories,
   getAllTags,
   getArchives,
-  getSlugsOrder,
+  getSlugsOrdered,
 } = require('../../service');
 const { getTitle } = require('../../../common/utils');
+
+const logger = getLogger('/routes/views/index');
 
 const HOME_TITLE = 'Pspgbhu 的博客';
 
@@ -22,7 +25,7 @@ router.use(routeArticle.routes());
  * 统一处理默认页面
  */
 router.get('*', filterPageRoute, serverState, pageTitle, async (ctx) => {
-  console.log('--- Dealing with * route'); // eslint-disable-line
+  logger.trace('in * route');
 
   const store = createStore(reducers, ctx.reactState, applyMiddleware(thunk));
   const context = Object.assign({}, ctx.reactContext);
@@ -37,24 +40,30 @@ router.get('*', filterPageRoute, serverState, pageTitle, async (ctx) => {
   });
 });
 
-
 /**
  * 生成服务端 redux state
  */
-async function serverState(ctx, next) {
-  console.log('--- Dealing with serverState router middleware');
-  const posts = getAllPosts();
 
-  Object.keys(posts).forEach((key) => {
+async function serverState(ctx, next) {
+  logger.trace('in serverState route');
+
+  const STAY_BRIEF_NUMBER = 5;
+  const posts = getAllPosts();
+  const slugsList = getSlugsOrdered();
+
+  slugsList.forEach((key, index) => {
     delete posts[key].content;
     delete posts[key].html;
+    if (index >= STAY_BRIEF_NUMBER) {
+      delete posts[key].brief;
+    }
   });
 
   ctx.reactState = _.merge({
     posts,
+    slugsList,
     tags: getAllTags(),
     archives: getArchives(),
-    slugsList: getSlugsOrder(),
     categories: getAllCategories(),
   }, ctx.reactState);
 
