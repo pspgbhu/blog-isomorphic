@@ -5,14 +5,12 @@ export const FETCH_BRIEF_ERROR = 'fetch_brief_error';
 export const FETCH_BRIEF_SUCCESS = 'fetch_brief_success';
 export const FETCH_BRIEF_CACHED = 'fetch_brief_cached';
 
-export const fetchBrief = (num = 0) => (dispatch, getState) => {
-  const { posts, slugsList } = getState();
+export const fetchBrief = list => (dispatch, getState) => {
+  const { posts } = getState();
   const needFetch = [];
-  const number = num || slugsList.length - 1;
 
-  slugsList.forEach((slug, index) => {
-    if (index > number) return;
-    if (!posts || !posts[slug] || !posts[slug].brief) {
+  list.forEach((slug) => {
+    if (posts[slug] && !posts[slug].brief) {
       needFetch.push(slug);
     }
   });

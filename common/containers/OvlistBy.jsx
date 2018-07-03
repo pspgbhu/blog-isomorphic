@@ -1,8 +1,10 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Viewblock from '../components/Viewblock';
+import OvlistBaseClass from './OvlistBaseClass';
+import Spinner from '../components/Spinner';
 
 function mapStateToProps(state, ownProps) {
   const { slugsList, posts } = state;
@@ -20,22 +22,55 @@ function mapStateToProps(state, ownProps) {
     return null;
   }).filter(item => item);
 
+  // It will to calculate how many articles to show, in first scene.
+  // And the number of first shown articles depends on the index of post
+  // that the first one has no brief.
+  let done = false;
+  let showIndex = -1;
+  cateSlugs.forEach((slug) => {
+    if (done) return;
+    if (posts[slug].brief) {
+      showIndex += 1;
+      return;
+    }
+    done = true;
+  });
+
   return {
     matching,
     posts,
-    cateSlugs,
+    slugsList: cateSlugs,
+    showIndex,
   };
 }
 
-class CategoriesOvlist extends Component {
-  render() {
-    const { posts, cateSlugs, matching } = this.props;
+class CategoriesOvlist extends OvlistBaseClass {
+  constructor(props) {
+    super(props);
+    this.state = Object.assign({}, super.state, {
+    });
+  }
 
-    const list = cateSlugs.map((slug) => {
+  componentDidMount() {
+    super.handleDidMount();
+  }
+
+  componentWillUnmount() {
+    super.handleUnmount();
+  }
+
+  componentDidUpdate(prevProps) {
+    super.handleDidUpdate(prevProps);
+  }
+
+  render() {
+    const { posts, slugsList, matching } = this.props;
+
+    const list = slugsList.map((slug, index) => {
       const {
         title, categories, tags, date, brief, img,
       } = posts[slug];
-      return (
+      return index <= this.props.showIndex && (
         <Viewblock
           key={slug}
           title={title}
@@ -53,6 +88,7 @@ class CategoriesOvlist extends Component {
       <main className="col-md-9 main-content">
         <h3>{matching}</h3>
         {list}
+        {this.state.loading && <Spinner/>}
       </main>
     );
   }

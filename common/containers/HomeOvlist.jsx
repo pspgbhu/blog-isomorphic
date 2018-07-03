@@ -1,13 +1,15 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { fetchBrief } from '../actions/fetchBrief';
 import Viewblock from '../components/Viewblock';
 import Spinner from '../components/Spinner';
-import { Throttle } from '../utils';
+import OvlistBaseClass from './OvlistBaseClass';
 
 function mapStateToProps(state) {
   const { slugsList, posts } = state;
 
+  // It will to calculate how many articles to show, in first scene.
+  // And the number of first shown articles depends on the index of post
+  // that the first one has no brief.
   let done = false;
   let showIndex = -1;
   slugsList.forEach((slug) => {
@@ -26,96 +28,29 @@ function mapStateToProps(state) {
   };
 }
 
-class Ovlist extends Component {
+class Ovlist extends OvlistBaseClass {
   constructor(props) {
     super(props);
-    this.state = {
-      loading: false,
-    };
-
-    this.throttleScroll = new Throttle(200, { execLastOne: true });
-
-    this.handleScroll = this.handleScroll.bind(this);
-    this.handleResize = this.handleResize.bind(this);
+    this.state = Object.assign({}, super.state, {
+    });
   }
 
   componentDidMount() {
-    this.updateTop();
-    this.updateWindowHeight();
-    document.addEventListener('scroll', this.handleScroll, { passive: true });
-    window.addEventListener('resize', this.handleResize, { passive: true });
+    super.handleDidMount();
   }
 
   componentWillUnmount() {
-    document.removeEventListener('scroll', this.handleScroll, { passive: true });
-    window.removeEventListener('resize', this.handleResize, { passive: true });
+    super.handleUnmount();
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.showIndex !== prevProps.showIndex) {
-      this.updateTop();
-    }
-  }
-
-  updateTop() {
-    const baseTop = 180 + 60 + 30;
-    this.top = document.querySelector('#slugs').offsetHeight + baseTop;
-  }
-
-  updateWindowHeight() {
-    this.windowHeight = window.innerHeight;
-  }
-
-  handleScroll() {
-    this.throttleScroll(() => {
-      const h = window.scrollY + this.windowHeight;
-      if (h > this.top) {
-        this.more();
-      }
-    });
-  }
-
-  handleResize() {
-    clearTimeout(this.resizeTimer);
-    this.resizeTimer = setTimeout(() => {
-      this.updateTop();
-      this.updateWindowHeight();
-    }, 300);
-  }
-
-  more() {
-    if (this.fetching) return;
-    this.fetching = true;
-
-    if (this.props.showIndex === this.props.slugsList.length - 1) {
-      return;
-    }
-
-    this.setState({
-      loading: true,
-    });
-
-    const index = this.props.showIndex + 5 > this.props.slugsList.length - 1 ?
-      this.props.slugsList.length - 1 :
-      this.props.showIndex + 5;
-
-    this.props.dispatch(fetchBrief(index)).then(() => {
-      this.fetching = false;
-      this.setState({
-        loading: false,
-      });
-    }).catch(() => {
-      this.fetching = false;
-      this.setState({
-        loading: false,
-      });
-    });
+    super.handleDidUpdate(prevProps);
   }
 
   render() {
     const { slugsList, posts } = this.props;
     return (
-      <main id="slugs" className="col-md-9 main-content">
+      <main className="col-md-9 main-content">
         {slugsList.map((slug, index) => {
           const {
             title, categories, tags, date, brief, img,
