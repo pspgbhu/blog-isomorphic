@@ -59,7 +59,9 @@ class Ovlist extends Component {
   updateTop() {
     const baseTop = 180 + 60 + 30;
     const marginBottom = 20;
-    this.top = document.querySelector('.content-wrap').offsetHeight + (baseTop - marginBottom);
+    const buffer = 40;
+    const offsetHeight = document.querySelector('.content-wrap').offsetHeight;
+    this.top = (offsetHeight + baseTop) - (marginBottom + buffer);
   }
 
   updateWindowHeight() {
