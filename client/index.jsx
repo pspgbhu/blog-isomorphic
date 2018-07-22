@@ -23,12 +23,12 @@ const preloadedState = window.__INITIAL_STATE_;
 
 const middlewares = [
   thunk,
-  logger,
 ];
 
-// if (process.env.NODE_ENV !== 'production') {
-//   middlewares.push(logger);
-// }
+if (process.env.NODE_ENV !== 'production') {
+  middlewares.push(logger);
+}
+
 
 const store = createStore(reducer, preloadedState, applyMiddleware(...middlewares));
 
