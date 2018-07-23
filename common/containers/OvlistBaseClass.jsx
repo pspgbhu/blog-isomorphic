@@ -12,7 +12,7 @@ class Ovlist extends Component {
 
     this.firstShownIndex = 4;
 
-    this.throttleScroll = new Throttle(200, { execLastOne: true });
+    this.throttleScroll = new Throttle(100, { execLastOne: true });
     this.handleScroll = this.handleScroll.bind(this);
     this.handleResize = this.handleResize.bind(this);
   }
