@@ -51,9 +51,11 @@ async function serverState(ctx, next) {
   const posts = getAllPosts();
   const slugsList = getSlugsOrdered();
 
+  // cut some props unnecessary
   slugsList.forEach((key, index) => {
     delete posts[key].content;
     delete posts[key].html;
+    // only keep a few brief that render in first scene
     if (index >= STAY_BRIEF_NUMBER) {
       delete posts[key].brief;
     }

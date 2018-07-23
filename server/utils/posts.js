@@ -54,3 +54,22 @@ exports.slugList = async () => {
 
   return slugs;
 };
+
+
+/**
+ * @returns
+ */
+export const filterPosts = (posts, filterProps) => {
+  if (!posts) return;
+  if (!filterProps || !Array.isArray(filterPosts)) return;
+
+  posts.forEach((key, index) => {
+
+    for (const prop of filterProps) {
+      if ('string' === typeof prop) {
+
+      }
+    }
+  });
+};
+
