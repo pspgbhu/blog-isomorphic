@@ -6,9 +6,11 @@
   "site": "http://pspgbhu.me",
   "scripts": {
     "start": "cross-env NODE_ENV=production node bin/www",
-    "build": "node build/build.js ",
+    "build": "cross-env NODE_ENV=production node build/build.js ",
     "prd": "pm2 start server/pm2.config.json",
-    "dev": "./node_modules/.bin/nodemon bin/www"
+    "dev": "npm run dev:client & npm run dev:server",
+    "dev:server": "./node_modules/.bin/nodemon bin/www",
+    "dev:client": "gulp watch"
   },
   "dependencies": {
     "autoprefixer": "^8.0.0",
@@ -39,6 +41,7 @@
     "extract-text-webpack-plugin": "^4.0.0-beta.0",
     "file-loader": "^1.1.11",
     "gitment": "^0.0.3",
+    "gulp": "^3.9.1",
     "history": "^4.7.2",
     "koa": "^2.2.0",
     "koa-bodyparser": "^3.2.0",

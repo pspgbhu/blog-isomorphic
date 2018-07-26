@@ -14,13 +14,6 @@ const config = {
     app: path.resolve(rootPath, 'client/index.jsx'),
   },
 
-  output: {
-    path: path.resolve(rootPath, 'server/public'),
-    filename: 'js/[name].js',
-    publicPath: '/',
-    chunkFilename: 'js/[name].js',
-  },
-
   resolve: {
     extensions: ['.js', '.json', '.jsx', 'less', 'css'],
   },

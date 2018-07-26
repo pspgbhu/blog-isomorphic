@@ -9,9 +9,12 @@ const config = merge(baseConfig, {
   mode: 'development',
 
   output: {
-    path: path.resolve(__dirname, '../.dev'),
+    path: path.resolve(__dirname, '../node_modules/.cache/rephic/public'),
     filename: 'js/[name].js',
+    publicPath: '/',
+    chunkFilename: 'js/[name].js',
   },
+
 
   devtool: 'cheap-module-source-map',
 

@@ -1,8 +1,5 @@
 const webpack = require('webpack');
 const chalk = require('chalk');
-
-process.env.NODE_ENV = 'production';
-
 const compiler = webpack(require('./webpack.prod'));
 
 compiler.run((err, stats) => {

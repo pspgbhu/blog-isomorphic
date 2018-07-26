@@ -33,13 +33,12 @@ app.use(bodyparser({
 app.use(json());
 app.use(koaLogger());
 
-// webpackDevServer
 if (process.env.NODE_ENV !== 'production') {
-  console.log(chalk.yellow('NOTICE: You are running application in development environment!'));
-  webpackDevServer(app);
+  app.use(serve(path.join(__dirname, '../node_modules/.cache/rephic/public')));
 }
 
 app.use(serve(path.join(__dirname, 'public')));
+
 app.use(views(path.join(__dirname, 'views'), {
   map: {
     html: 'ejs',
