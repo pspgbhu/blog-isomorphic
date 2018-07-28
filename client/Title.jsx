@@ -13,9 +13,11 @@ class Title extends Component {
   componentDidUpdate(prevProps) {
     if (this.props.location.pathname !== prevProps.location.pathname) {
       this.changeTitle();
+
+      // 选择上报 pv 的平台
       this.reportPagePV([
         'baidu',
-        // 'google',
+        'google',
       ]);
     }
   }
