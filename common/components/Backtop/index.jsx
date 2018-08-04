@@ -12,17 +12,17 @@ export default class componentName extends Component {
   }
 
   render() {
-    return this.state.shown ?
-      (<div className="backtop" onClick={() => this.toTop()}>
+    return (
+      <div className={ this.state.shown ? 'backtop backtop-shown' : 'backtop' } onClick={() => this.toTop()}>
         <i className="fa fa-arrow-up"></i>
       </div>
-      ) : null;
+    );
   }
 
   componentDidMount() {
     this.ifShown();
 
-    const throttle = new Throttle(200);
+    const throttle = new Throttle(100);
     document.addEventListener('scroll', (e) => {
       throttle(() => this.ifShown());
     }, { passive: true });

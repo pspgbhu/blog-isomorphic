@@ -10,9 +10,14 @@
 
     border-radius: 4px;
     background: #000;
-    opacity: 0.5;
+    transition: opacity .1s;
+    opacity: 0;
 
     cursor: pointer;
+
+    &-shown {
+        opacity: 0.5;
+    }
 
     .fa-arrow-up {
         color: #fff;
