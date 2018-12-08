@@ -1,4 +1,3 @@
-const chalk = require('chalk');
 const path = require('path');
 const Koa = require('koa');
 const views = require('koa-views');
@@ -8,16 +7,16 @@ const bodyparser = require('koa-bodyparser');
 const koaLogger = require('koa-logger');
 const serve = require('koa-static');
 const { configure } = require('log4js');
-const loggerConfig = require('./config/logger');
-const index = require('./routes');
-const webpackDevServer = require('./middlewares/webpackDevServer');
-const apiError = require('./middlewares/apiError');
-const log = require('./middlewares/log');
+const loggerConfig = require('./common/config/logger');
+const router = require('./router');
+const apiError = require('./middleware/apiError');
+const log = require('./middleware/log');
+const initDatabasePosts = require('./init/initDatabasePosts');
 
 configure(loggerConfig);
 
 // 初始化 db.json 中的 posts 数据
-require('./init/initDatabasePosts')();
+initDatabasePosts();
 
 console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
 
@@ -47,7 +46,7 @@ app.use(views(path.join(__dirname, 'views'), {
 }));
 
 app.use(apiError());
-app.use(index.routes(), index.allowedMethods());
+app.use(router.routes(), router.allowedMethods());
 
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx);

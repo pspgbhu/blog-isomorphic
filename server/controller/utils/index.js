@@ -1,0 +1,1 @@
+exports.Res = require('./Res');

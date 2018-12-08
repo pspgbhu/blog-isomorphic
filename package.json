@@ -6,7 +6,7 @@
   "site": "http://pspgbhu.me",
   "scripts": {
     "start": "cross-env NODE_ENV=production node bin/www",
-    "build": "cross-env NODE_ENV=production node build/build.js ",
+    "build": "cross-env NODE_ENV=production node client/build/build.js ",
     "prd": "pm2 start server/pm2.config.json",
     "dev": "npm run dev:client & npm run dev:server",
     "dev:server": "./node_modules/.bin/nodemon bin/www",
@@ -45,6 +45,7 @@
     "history": "^4.7.2",
     "koa": "^2.2.0",
     "koa-bodyparser": "^3.2.0",
+    "koa-compose": "^4.1.0",
     "koa-convert": "^1.2.0",
     "koa-json": "^2.0.2",
     "koa-logger": "^2.0.1",

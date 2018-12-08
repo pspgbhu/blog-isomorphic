@@ -1,7 +1,7 @@
 const path = require('path');
 const low = require('lowdb');
 const FileAsync = require('lowdb/adapters/FileAsync');
-const { slugList, readFileAndParse } = require('../utils/posts');
+const { slugList, readFileAndParse } = require('../common/utils/posts');
 const { getLogger } = require('log4js');
 
 const logger = getLogger('initDatabasePosts');
